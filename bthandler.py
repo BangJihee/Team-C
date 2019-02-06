@@ -15,7 +15,7 @@ class BTClientHandler(asyncore.dispatcher_with_send):
 
     def handle_read(self):
         try:
-            data = self.recv(1024)
+            data = self.recv(1024).decode('ascii')
             if not data:
                 return
 
@@ -29,9 +29,8 @@ class BTClientHandler(asyncore.dispatcher_with_send):
                 self.data += data[:lf_char_index]
                 print("received [{}]".format(self.data))
 
-                self.send(self.data + '\n')
                 self.send((self.data + '\n').encode('ascii'))
-                
+
 
                 # Clear the buffer
                 self.data = ""
