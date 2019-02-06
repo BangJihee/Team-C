@@ -30,6 +30,8 @@ class BTClientHandler(asyncore.dispatcher_with_send):
                 print("received [{}]".format(self.data))
 
                 self.send(self.data + '\n')
+                self.send((self.data + '\n').encode('ascii'))
+                
 
                 # Clear the buffer
                 self.data = ""
