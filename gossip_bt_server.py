@@ -178,7 +178,7 @@ if __name__ == '__main__':
 
             msg = ""
             if args.output_format == "csv":
-                msg = "realtime, {}, {}, {}, {}, {}, {}, {}".format(epoch_time, temp, NO2, O3, CO, SO2, PM25)
+                msg = "realtime, {}, {}, {}, {}, {}, {}, {}".format(epoch_time, t, NO2, O3, CO, SO2, PM25)
             elif args.output_format == "json":
                 output = {'type': 'realtime',
                           'time': epoch_time,
