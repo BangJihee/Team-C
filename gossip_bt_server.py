@@ -167,23 +167,23 @@ if __name__ == '__main__':
 
 
             #temp = uniform(20, 30)      # random temperature
-            NO2 = uniform(40, 50)       # random SN1 value
-            O3 = uniform(60, 70)       # random SN2 value
-            CO = uniform(80, 90)       # random SN3 value
-            SO2 = uniform(100, 110)     # random SN4 value
+            SN1 = uniform(40, 50)       # random SN1 value
+            SN2 = uniform(60, 70)       # random SN2 value
+            SN3 = uniform(80, 90)       # random SN3 value
+            SN4 = uniform(100, 110)     # random SN4 value
             PM25 = uniform(120, 130)    # random PM25 value
 
             msg = ""
             if args.output_format == "csv":
-                msg = "realtime, {}, {}, {}, {}, {}, {}, {}".format(epoch_time, t, NO2, O3, CO, SO2, PM25)
+                msg = "realtime, {}, {}, {}, {}, {}, {}, {}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25)
             elif args.output_format == "json":
                 output = {'type': 'realtime',
                           'time': epoch_time,
                           'temp': t,
-                          'NO2': NO2,
-                          'O3': O3,
-                          'CO': CO,
-                          'SO2': SO2,
+                          'SN1': SN1,
+                          'SN2': SN2,
+                          'SN3': SN3,
+                          'SN4': SN4,
                           'PM25': PM25}
                 msg = json.dumps(output)
             try:
@@ -192,5 +192,5 @@ if __name__ == '__main__':
                 BTError.print_error(handler=client_handler, error=BTError.ERR_WRITE, error_message=repr(e))
                 client_handler.handle_close()
 
-            # Sleep for 3 seconds
-        sleep(3)
+            # Sleep for 2 seconds
+        sleep(2)
