@@ -152,12 +152,24 @@ if __name__ == '__main__':
     server_thread.daemon = True
     server_thread.start()
 
+    #------------------------------------------------------------------------------
+
+
+    raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
+    scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+    v = raw * scale
+    t = (v - 500) / 10 - 6
+    sleep(1)
+
+
+
+
     while True:
         for client_handler in server.active_client_handlers.copy():
             # Use a copy() to get the copy of the set, avoiding 'set change size during iteration' error
             # Create CSV message "'realtime', time, temp, SN1, SN2, SN3, SN4, PM25\n"
             epoch_time = time()   # epoch time
-            temp = uniform(20, 30)      # random temperature
+            #temp = uniform(20, 30)      # random temperature
             NO2 = uniform(40, 50)       # random SN1 value
             O3 = uniform(60, 70)       # random SN2 value
             CO = uniform(80, 90)       # random SN3 value
@@ -170,7 +182,7 @@ if __name__ == '__main__':
             elif args.output_format == "json":
                 output = {'type': 'realtime',
                           'time': epoch_time,
-                          'temp': temp,
+                          'temp': t,
                           'NO2': NO2,
                           'O3': O3,
                           'CO': CO,
