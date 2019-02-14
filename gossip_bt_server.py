@@ -1,6 +1,6 @@
 from btserver import BTServer
 from bterror import BTError
-#from Senor import SensorServer
+from Sensor import SensorServer
 
 import argparse
 import asyncore
