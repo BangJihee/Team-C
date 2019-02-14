@@ -23,9 +23,7 @@ if __name__ == '__main__':
     parser.add_argument("--database", dest="database_name",default="air_pollution_data.db", help="specify data file")
     parser.add_argument("--baud_rate", default="115200", help="specify bluetooth baud rate in bps")
 
-
     args = parser.parse_args()
-
 
     # Create a BT server
     uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
@@ -62,7 +60,6 @@ if __name__ == '__main__':
         SO2 = sensor_output.get('SO2', -1)  #  SN4 SO2 value
         PM25 = sensor_output.get('PM25', -1)  #  PM25 value
 
-
         r_msg=" "
         if args.output_format=="cvs":
             r_msg=" {} ,{} , {} , {} , {} , {} , {} ".format(epoch_time.teemp,NO2,O3,CO,SO2,PM25)
@@ -75,7 +72,6 @@ if __name__ == '__main__':
                     'PM25' : PM25
             }
             r_msg=json.dumps(output)
-
 
         for client_handler in bt_server.active_client_handlers():
             if client_handler.sending_status.get('History')[0]:
@@ -110,7 +106,6 @@ if __name__ == '__main__':
                         i +=1
                         h_msg="{},{},{},{},{},{},{}".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6])
                         client_handler.send('h'+ h_msg +'\n')
-
 
                         print("INFO : sending results ({}/{}) ...\r".format(i,n))
                         sleep(((len(h_msg)+2)*8*1.1/int(args.baud_rate)))
