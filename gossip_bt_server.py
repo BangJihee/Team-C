@@ -172,9 +172,9 @@ if __name__ == '__main__':
     sleep(0.5)
     neo.digitalWrite(pinNum[1], 0)
     sleep(0.5)
-    neo.digitalWrite(pinNum[2], 1)
+    neo.digitalWrite(pinNum[2], 0)
     sleep(0.5)
-    neo.digitalWrite(pinNum[3], 1)
+    neo.digitalWrite(pinNum[3], 0)
     sleep(0.5)
 
     raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
@@ -184,7 +184,7 @@ if __name__ == '__main__':
 
     t= t*1.8 + 32
     print(t)
-    
+
     sleep(1)
 
 
