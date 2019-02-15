@@ -168,6 +168,7 @@ if __name__ == '__main__':
     for i in range(4):
         neo.pinMode(pinNum[i], neo.OUTPUT)
 
+
     neo.digitalWrite(pinNum[0], 0)
     sleep(0.5)
     neo.digitalWrite(pinNum[1], 0)
