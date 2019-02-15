@@ -176,13 +176,13 @@ if __name__ == '__main__':
     sleep(0.5)
     neo.digitalWrite(pinNum[3], 0)
     sleep(0.5)
-    '''
+
     raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
     scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
     v = raw * scale
     t = (v - 500) / 10 - 6
     t= t*1.8 + 32
-    '''
+    
     sleep(1)
 
 
