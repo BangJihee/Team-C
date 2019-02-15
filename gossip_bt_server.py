@@ -184,7 +184,6 @@ if __name__ == '__main__':
     sleep(1)
     print(t)
 
-    #------------------------------------------------------------------------------
 
     while True:
         for client_handler in server.active_client_handlers.copy():
