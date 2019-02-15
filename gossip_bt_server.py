@@ -196,7 +196,6 @@ if __name__ == '__main__':
             v = raw * scale
             t = (v - 500) / 10 - 6
 
-
             #temp = uniform(20, 30)      # random temperature
             SN1 = uniform(40, 50)       # random SN1 value
             SN2 = uniform(60, 70)       # random SN2 value
