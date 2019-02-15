@@ -130,7 +130,6 @@ from neo import Gpio
 import argparse
 import asyncore
 import json
-import json
 from random import uniform
 from threading import Thread
 from time import sleep, time
@@ -173,15 +172,16 @@ if __name__ == '__main__':
     sleep(0.5)
     neo.digitalWrite(pinNum[1], 0)
     sleep(0.5)
-    neo.digitalWrite(pinNum[2], 1)
+    neo.digitalWrite(pinNum[2], 0)
     sleep(0.5)
-    neo.digitalWrite(pinNum[3], 1)
+    neo.digitalWrite(pinNum[3],0)
     sleep(0.5)
 
     raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
     scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
     v = raw * scale
     t = (v - 500) / 10 - 6
+    t= t*1.8 + 32
     sleep(1)
     print(t)
 
