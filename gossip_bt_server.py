@@ -191,7 +191,7 @@ if __name__ == '__main__':
 
             # Use a copy() to get the copy of the set, avoiding 'set change size during iteration' error
             # Create CSV message "'realtime', time, temp, SN1, SN2, SN3, SN4, PM25\n"
-            epoch_time = time()   # epoch time
+            epoch_time = int(time())   # epoch time
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             v = raw * scale
