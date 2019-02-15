@@ -183,7 +183,8 @@ if __name__ == '__main__':
     t = (v - 500) / 10 - 6
 
     t= t*1.8 + 32
-
+    print(t)
+    
     sleep(1)
 
 
@@ -202,6 +203,8 @@ if __name__ == '__main__':
             v = raw * scale
             t = (v - 500) / 10 - 6
             t = t * 1.8 + 32
+
+            print(t)
 
             SN1 = uniform(40, 50)       # random SN1 value
             SN2 = uniform(60, 70)       # random SN2 value
