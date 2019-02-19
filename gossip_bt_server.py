@@ -21,9 +21,9 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    # Create a BT server
+    # Create a Air pollution sensor server
     uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
-    service_name = "BTServer"
+    service_name = "Air pollution sensor"
     server = BTServer(uuid, service_name)
 
     # Create the server thread and run it
@@ -44,8 +44,8 @@ if __name__ == '__main__':
     sensor_type=['Temp','NO2','O3','CO','SO2','PM25']
 
     # Using A0 pin
-    raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
-    scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+    #raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
+    #scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
 
     #Set GPIO pins to output
     try:
@@ -54,13 +54,23 @@ if __name__ == '__main__':
     except Exception as e:
         logger.error("Error : GPIO pin {} .reason {}".format(pin,e.message))
 
+    # Create database connection using cursor-sqlite Database
+    try:
+        db_conn = sqlite3.connect('air_quality_data.db')
+        db_c = db_conn.cursor()
+    except Exception as e:
+        logger.error("Connecting error with the database {} ,reason {} ".format(args.database_name, e.message))
+
+        # Create table
+        # Time | Temp   | SN1    | SN2   | SN3    | SN4    | PM25
+        # in  | r_data | r_data | r_data| r_data | r_data | r_data
+    db_c.execute(
+        "CREATE TABLE IF NOT EXISTS HISTORY Data { } r_data,{ } r_data,{ } r_data,{ } r_data,{ } r_data,{ } r_data,{ } r_data,").format(sensor_type[0], sensor_type[1], sensor_type[2], sensor_type[3], sensor_type[4], sensor_type[5],
+        sensor_type[6])
+
 
     #def sensor_output():
-    #    return sensor_output.copy()
-
-    #sqlite Database
-    conn=sqlite3.connect('air_quality_data.db')
-    c=conn.cursor()
+    #return sensor_output.copy()
 
     #Create table
     #c.execute("CREATE TABLE IF NOT EXISTS HISTORY Data")
@@ -123,8 +133,6 @@ if __name__ == '__main__':
             print(c2)
 
 
-
-
             #c3
             gpio.digitalWrite(gpiopins[0], 1)
             sleep(0.5)
@@ -140,7 +148,7 @@ if __name__ == '__main__':
             c3 = raw * scale
             print(c3)
 
-            SN1 = ((c2 - 290) - ((1.18) * (c3 - 280))) * 4.386
+            SN1 = ((c2 - V) - ((1.18) * (c3 - V))) * A
             SN1 = SN1 if (SN1 >= 0) else -SN1
             print("NO2 _SN1 : {}".format(SN1))
 
@@ -175,7 +183,7 @@ if __name__ == '__main__':
             print(c5)
 
 
-            SN2 = ((c4 - 390) - ((0.18) * (c5 - 390))) * 2.5
+            SN2 = ((c4 - V) - ((0.18) * (c5 - V))) * A
             SN2 = SN2 if (SN2 >= 0) else -SN2
             print("O3 _SN2 : {}".format(SN2))
 
@@ -211,7 +219,7 @@ if __name__ == '__main__':
             c7 = raw * scale
             print(c7)
 
-            SN3 =((c6 - 350) - ((0.03) * (c7 - 280))) * 0.03
+            SN3 =((c6 - V) - ((0.03) * (c7 - V))) * A
             SN3 = SN3 if (SN3 >= 0) else -SN3
             print("CO_SN3 : {}".format(SN3))
 
@@ -246,7 +254,7 @@ if __name__ == '__main__':
             c9 = raw * scale
             print(c9)
 
-            SN4 =((c8 - 345) - ((1.15) * (c9 - 250))) * 3.2
+            SN4 =((c8 - V) - ((1.15) * (c9 - V))) * A
             SN4 = SN4 if (SN4 >= 0) else -SN4
             print("SO2_SN4 : {}".format(SN4))
 
@@ -275,13 +283,13 @@ if __name__ == '__main__':
 
 
             # Insert a row of data
-            c.execute("INSERT INTO history data {},{},{},{},{},{},{}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25))
+            db_c.execute("INSERT INTO history data {},{},{},{},{},{},{}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25))
 
             # Save (commit) the changes
-            conn.commit()
+            db_conn.commit()
 
             # User can close the connection if user are done with it
-            conn.close()
+            db_conn.close()
 
             # Sleep for 1 seconds
         sleep(1)
