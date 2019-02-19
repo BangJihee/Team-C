@@ -63,7 +63,7 @@ if __name__ == '__main__':
     c=conn.cursor()
 
     #Create table
-    c.execute("CREATE TABLE IF NOT EXISTS HISTORY Data")
+    #c.execute("CREATE TABLE IF NOT EXISTS HISTORY Data")
 
     for i in range(4):
         gpio.pinMode(gpiopins[i], gpio.OUTPUT)
