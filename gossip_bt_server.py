@@ -1,4 +1,3 @@
-
 from btserver import BTServer
 from bterror import BTError
 from neo import Gpio
@@ -71,9 +70,9 @@ if __name__ == '__main__':
     sleep(0.5)
 
     v = raw * scale
-    temp = (v - 500) / 10 - 6
+    t = (v - 500) / 10 - 6
     #Celsius to Fehrenheit formula
-    temp= temp*1.8 + 32
+    t= t*1.8 + 32
 
 
     sleep(1)
@@ -92,15 +91,15 @@ if __name__ == '__main__':
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             v = raw * scale
-            temp =  (v - 500) / 10 - 6
+            t =  (v - 500) / 10 - 6
             # Celsius to Fehrenheit formula
-            temp = temp * 1.8 + 32
-            print(temp)
+            t = t * 1.8 + 32
+            print(t)
 
-            
+
             #Sensor read the value
-            logger.info("Reading sensor :{}".format(sensor_type[0],temp))
-            sensor_output[sensor_type[0]]=temp
+            logger.info("Reading sensor :{}".format(sensor_type[0],t))
+            sensor_output[sensor_type[0]]=t
 
             #c2
 
@@ -206,7 +205,7 @@ if __name__ == '__main__':
             if args.output_format == "json":
                 output = {'type': 'realtime',
                           'time': epoch_time,
-                          'temp': temp,
+                          'temp': t,
                           'SN1': SN1,
                           'SN2': SN2,
                           'SN3': SN3,
@@ -214,7 +213,7 @@ if __name__ == '__main__':
                           'PM25': PM25}
                 msg = json.dumps(output)
             elif args.output_format == "csv":
-                msg = "realtime, {}, {}, {}, {}, {}, {}, {}".format(epoch_time, temp, SN1, SN2, SN3, SN4, PM25)
+                msg = "realtime, {}, {}, {}, {}, {}, {}, {}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25)
             try:
                 client_handler.send((msg + '\n').encode('ascii'))
             except Exception as e:
