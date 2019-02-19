@@ -112,8 +112,8 @@ if __name__ == '__main__':
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
 
-            v = raw * scale
-            t = (v - 500) / 10 - 6
+            c0 = raw * scale
+            t = (c0 - 500) / 10 - 6
             # Celsius to Fehrenheit formula
             t = t * 1.8 + 32
 
@@ -137,9 +137,12 @@ if __name__ == '__main__':
             sleep(0.5)
 
 
-            #raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
-            #scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
-            #v = raw * scale
+            raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
+            scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+            c2 = raw * scale
+            print(c2)
+
+
 
 
             #c3
@@ -151,8 +154,15 @@ if __name__ == '__main__':
             sleep(0.5)
             gpio.digitalWrite(gpiopins[3], 0)
             sleep(0.5)
-            SN1 = uniform(40, 50)       # random SN1 value
 
+            raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
+            scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+            c3 = raw * scale
+            print(c3)
+
+            SN1 = ((c2 - 290) - ((0.75) * (c3 - 280))) * 4.386
+            SN1 = SN1 if (SN1 >= 0) else -SN1
+            print("NO2 _SN1 : {}".format(SN1))
 
             #c4
             gpio.digitalWrite(gpiopins[0], 0)
@@ -164,6 +174,11 @@ if __name__ == '__main__':
             gpio.digitalWrite(gpiopins[3], 0)
             sleep(0.5)
 
+            raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
+            scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+            c4 = raw * scale
+            print(c4)
+
             #c5
             gpio.digitalWrite(gpiopins[0], 1)
             sleep(0.5)
@@ -174,8 +189,16 @@ if __name__ == '__main__':
             gpio.digitalWrite(gpiopins[3], 0)
             sleep(0.5)
 
+            raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
+            scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+            c5 = raw * scale
+            print(c5)
 
-            SN2 = uniform(60, 70)       # random SN2 value
+
+            SN2 = ((c4 - 390) - ((0.75) * (c5 - 390))) * 2.5
+            SN2 = SN2 if (SN2 >= 0) else -SN2
+            print("O3 _SN2 : {}".format(SN2))
+
 
             #c6
             gpio.digitalWrite(gpiopins[0], 0)
@@ -187,6 +210,12 @@ if __name__ == '__main__':
             gpio.digitalWrite(gpiopins[3], 0)
             sleep(0.5)
 
+            raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
+            scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+            c6 = raw * scale
+            print(c6)
+
+
             #c7
             gpio.digitalWrite(gpiopins[0], 1)
             sleep(0.5)
@@ -197,7 +226,14 @@ if __name__ == '__main__':
             gpio.digitalWrite(gpiopins[3], 0)
             sleep(0.5)
 
-            SN3 = uniform(80, 90)       # random SN3 value
+            raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
+            scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+            c7 = raw * scale
+            print(c7)
+
+            SN3 =((c6 - 350) - ((0.75) * (c7 - 280))) * 0.03
+            SN3 = SN3 if (SN3 >= 0) else -SN3
+            print("CO_SN3 : {}".format(SN3))
 
             #c8
             gpio.digitalWrite(gpiopins[0], 0)
@@ -209,6 +245,12 @@ if __name__ == '__main__':
             gpio.digitalWrite(gpiopins[3], 1)
             sleep(0.5)
 
+            raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
+            scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+            c8 = raw * scale
+            print(c8)
+
+
             #c9
             gpio.digitalWrite(gpiopins[0], 1)
             sleep(0.5)
@@ -219,10 +261,14 @@ if __name__ == '__main__':
             gpio.digitalWrite(gpiopins[3], 1)
             sleep(0.5)
 
+            raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
+            scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+            c9 = raw * scale
+            print(c9)
 
-            SN4 = uniform(100, 110)     # random SN4 value
-
-
+            SN4 =((c8 - 345) - ((0.6) * (c9 - 250))) * 3.2
+            SN4 = SN4 if (SN4 >= 0) else -SN4
+            print("SO2_SN4 : {}".format(SN4))
 
             #PM sensor
             PM25 = uniform(120, 130)    # random PM25 value
