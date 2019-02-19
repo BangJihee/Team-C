@@ -105,7 +105,7 @@ while True:
             # Celsius to Fehrenheit formula
             t = t * 1.8 + 32
 
-            print(t)
+            print("Temp: {}F".format.int(t))
 
             #Sensor read the value
             #logger.info("Reading sensor :{}".format(sensor_type[0],t))
@@ -124,8 +124,6 @@ while True:
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c2 = raw * scale
-            print(c2)
-
 
             #c3
             for i in range(4):
@@ -140,7 +138,7 @@ while True:
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c3 = raw * scale
-            print(c3)
+
 
             SN1 = ((c2 - 290) - ((1.18) * (c3 - 284))) / 0.207
             SN1 = SN1 if (SN1 >= 0) else -SN1
@@ -158,7 +156,7 @@ while True:
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c4 = raw * scale
-            print(c4)
+
 
             #c5
             for i in range(4):
@@ -172,7 +170,7 @@ while True:
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c5 = raw * scale
-            print(c5)
+
 
 
             SN2 = ((c4 -408 ) - ((0.18) * (c5 - 403))) / 0.256
@@ -192,7 +190,7 @@ while True:
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c6 = raw * scale
-            print(c6)
+
 
 
             #c7
@@ -207,7 +205,7 @@ while True:
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c7 = raw * scale
-            print(c7)
+
 
             SN3 =((c6 - 298) - ((0.03) * (c7 - 279))) / 0.276
             SN3 = SN3 if (SN3 >= 0) else -SN3
@@ -225,7 +223,7 @@ while True:
             raw = int(open("/sys/bus/iio/devices/iio:device0/in _voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c8 = raw * scale
-            print(c8)
+
 
 
             #c9
@@ -240,7 +238,7 @@ while True:
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c9 = raw * scale
-            print(c9)
+
 
             SN4 =((c8 - 300) - ((1.15) * (c9 - 292))) / 0.300
             SN4 = SN4 if (SN4 >= 0) else -SN4
@@ -264,7 +262,7 @@ while True:
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c11 = (raw * scale)/1000
-            print(c11)
+            
 
             PM25 = (240.0*pow(c11,6) - 2491.3*pow(c11,5) + 9448.7*pow(c11,4) - 14840.0*pow(c11,3) + 10684.0*pow(c11,2) + 2211.8*c11 + 7.9623)
             PM25 = PM25 if (SN4 >= 0) else -PM25
