@@ -250,11 +250,11 @@ while True:
             # c11
             for i in range(4):
                 gpio.pinMode(gpiopins[i], gpio.OUTPUT)
-            gpio.digitalWrite(gpiopins[0], 0)
+            gpio.digitalWrite(gpiopins[0], 1)
             sleep(0.5)
-            gpio.digitalWrite(gpiopins[1], 0)
+            gpio.digitalWrite(gpiopins[1], 1)
             sleep(0.5)
-            gpio.digitalWrite(gpiopins[2], 1)
+            gpio.digitalWrite(gpiopins[2], 0)
             sleep(0.5)
             gpio.digitalWrite(gpiopins[3], 1)
             sleep(0.05)
