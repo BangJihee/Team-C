@@ -90,17 +90,15 @@ if __name__ == '__main__':
                 gpio.pinMode(gpiopins[i], gpio.OUTPUT)
             # c0 temp
             gpio.digitalWrite(gpiopins[0], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[1], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[2], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[3], 0)
-            sleep(0.5)
+            sleep(0.05)
 
             # real-time temperature
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+
 
             c0 = raw * scale
             t = (c0 - 500) / 10 - 6
@@ -110,7 +108,7 @@ if __name__ == '__main__':
             print(t)
 
             #Sensor read the value
-            logger.info("Reading sensor :{}".format(sensor_type[0],t))
+            #logger.info("Reading sensor :{}".format(sensor_type[0],t))
             #sensor_output[sensor_type[0]]=t
 
             #c2
@@ -118,14 +116,10 @@ if __name__ == '__main__':
             for i in range(4):
                 gpio.pinMode(gpiopins[i], gpio.OUTPUT)
             gpio.digitalWrite(gpiopins[0], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[1], 1)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[2], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[3], 0)
-            sleep(0.5)
-
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -134,14 +128,14 @@ if __name__ == '__main__':
 
 
             #c3
+            for i in range(4):
+                gpio.pinMode(gpiopins[i], gpio.OUTPUT)
             gpio.digitalWrite(gpiopins[0], 1)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[1], 1)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[2], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[3], 0)
-            sleep(0.5)
+
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -153,14 +147,13 @@ if __name__ == '__main__':
             print("NO2 _SN1 : {}".format(SN1))
 
             #c4
+            for i in range(4):
+                gpio.pinMode(gpiopins[i], gpio.OUTPUT)
             gpio.digitalWrite(gpiopins[0], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[1], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[2], 1)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[3], 0)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -168,14 +161,13 @@ if __name__ == '__main__':
             print(c4)
 
             #c5
+            for i in range(4):
+                gpio.pinMode(gpiopins[i], gpio.OUTPUT)
             gpio.digitalWrite(gpiopins[0], 1)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[1], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[2], 1)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[3], 0)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -189,14 +181,13 @@ if __name__ == '__main__':
 
 
             #c6
+            for i in range(4):
+                gpio.pinMode(gpiopins[i], gpio.OUTPUT)
             gpio.digitalWrite(gpiopins[0], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[1], 1)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[2], 1)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[3], 0)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -205,14 +196,13 @@ if __name__ == '__main__':
 
 
             #c7
+            for i in range(4):
+                gpio.pinMode(gpiopins[i], gpio.OUTPUT)
             gpio.digitalWrite(gpiopins[0], 1)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[1], 1)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[2], 1)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[3], 0)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -224,14 +214,13 @@ if __name__ == '__main__':
             print("CO_SN3 : {}".format(SN3))
 
             #c8
+            for i in range(4):
+                gpio.pinMode(gpiopins[i], gpio.OUTPUT)
             gpio.digitalWrite(gpiopins[0], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[1], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[2], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[3], 1)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in _voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -240,14 +229,13 @@ if __name__ == '__main__':
 
 
             #c9
+            for i in range(4):
+                gpio.pinMode(gpiopins[i], gpio.OUTPUT)
             gpio.digitalWrite(gpiopins[0], 1)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[1], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[2], 0)
-            sleep(0.5)
             gpio.digitalWrite(gpiopins[3], 1)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -262,6 +250,8 @@ if __name__ == '__main__':
             #PM sensor
 
             # c11
+            for i in range(4):
+                gpio.pinMode(gpiopins[i], gpio.OUTPUT)
             gpio.digitalWrite(gpiopins[0], 0)
             sleep(0.5)
             gpio.digitalWrite(gpiopins[1], 0)
@@ -269,7 +259,7 @@ if __name__ == '__main__':
             gpio.digitalWrite(gpiopins[2], 1)
             sleep(0.5)
             gpio.digitalWrite(gpiopins[3], 1)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -278,10 +268,10 @@ if __name__ == '__main__':
 
             PM25 = (240.0*pow(c11,6) - 2491.3*pow(c11,5) + 9448.7*pow(c11,4) - 14840.0*pow(c11,3) + 10684.0*pow(c11,2) + 2211.8*c11 + 7.9623)
             PM25 = PM25 if (SN4 >= 0) else -PM25
-            print("SO2_SN4 : {}".format(SN4))
+            print("PM25 : {}".format(PM25))
 
             msg = ""
-            
+
             if args.output_format == "json":
                 output = {'type': 'realtime',
                           'time': epoch_time,
@@ -311,4 +301,4 @@ if __name__ == '__main__':
             #db_conn.close()
 
             # Sleep for 1 seconds
-        sleep(1)
+        sleep(4.5)
