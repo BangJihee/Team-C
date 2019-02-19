@@ -76,7 +76,7 @@ if __name__ == '__main__':
     #c.execute("CREATE TABLE IF NOT EXISTS HISTORY Data")
 
 
-    while True:
+while True:
         for client_handler in server.active_client_handlers.copy():
 
             # Use a copy() to get the copy of the set, avoiding 'set change size during iteration' error
