@@ -148,7 +148,7 @@ if __name__ == '__main__':
             c3 = raw * scale
             print(c3)
 
-            SN1 = ((c2 - V) - ((1.18) * (c3 - V))) * A
+            SN1 = ((c2 - 290) - ((1.18) * (c3 - 284))) * -207
             SN1 = SN1 if (SN1 >= 0) else -SN1
             print("NO2 _SN1 : {}".format(SN1))
 
@@ -183,7 +183,7 @@ if __name__ == '__main__':
             print(c5)
 
 
-            SN2 = ((c4 - V) - ((0.18) * (c5 - V))) * A
+            SN2 = ((c4 -408 ) - ((0.18) * (c5 - 403))) * -256
             SN2 = SN2 if (SN2 >= 0) else -SN2
             print("O3 _SN2 : {}".format(SN2))
 
@@ -219,7 +219,7 @@ if __name__ == '__main__':
             c7 = raw * scale
             print(c7)
 
-            SN3 =((c6 - V) - ((0.03) * (c7 - V))) * A
+            SN3 =((c6 - 298) - ((0.03) * (c7 - 279))) * -276
             SN3 = SN3 if (SN3 >= 0) else -SN3
             print("CO_SN3 : {}".format(SN3))
 
@@ -233,7 +233,7 @@ if __name__ == '__main__':
             gpio.digitalWrite(gpiopins[3], 1)
             sleep(0.5)
 
-            raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
+            raw = int(open("/sys/bus/iio/devices/iio:device0/in _voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c8 = raw * scale
             print(c8)
@@ -254,7 +254,7 @@ if __name__ == '__main__':
             c9 = raw * scale
             print(c9)
 
-            SN4 =((c8 - V) - ((1.15) * (c9 - V))) * A
+            SN4 =((c8 - 300) - ((1.15) * (c9 - 292))) * -300
             SN4 = SN4 if (SN4 >= 0) else -SN4
             print("SO2_SN4 : {}".format(SN4))
 
