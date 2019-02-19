@@ -233,7 +233,7 @@ if __name__ == '__main__':
 
 
             # Insert a row of data
-            c.execute("INSERT INTO history data {},{},{},{},{},[},{}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25))
+            c.execute("INSERT INTO history data {},{},{},{},{},{},{}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25))
 
             # Save (commit) the changes
             conn.commit()
