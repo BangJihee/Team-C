@@ -94,13 +94,27 @@ if __name__ == '__main__':
             epoch_time = int(time())
             #sensor_output['TIme'] = epoch_time
 
-            #real-time temperature
+            for i in range(4):
+                gpio.pinMode(gpiopins[i], gpio.OUTPUT)
+            # c0 temp
+            gpio.digitalWrite(gpiopins[0], 0)
+            sleep(0.5)
+            gpio.digitalWrite(gpiopins[1], 0)
+            sleep(0.5)
+            gpio.digitalWrite(gpiopins[2], 0)
+            sleep(0.5)
+            gpio.digitalWrite(gpiopins[3], 0)
+            sleep(0.5)
+
+            # real-time temperature
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+
             v = raw * scale
-            t =(v - 500) / 10 - 6
+            t = (v - 500) / 10 - 6
             # Celsius to Fehrenheit formula
             t = t * 1.8 + 32
+
             print(t)
 
             #Sensor read the value
@@ -121,9 +135,9 @@ if __name__ == '__main__':
             sleep(0.5)
 
 
-            raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
-            scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
-            v = raw * scale
+            #raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
+            #scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+            #v = raw * scale
 
 
             #c3
@@ -208,7 +222,7 @@ if __name__ == '__main__':
 
 
 
-
+            #PM sensor
             PM25 = uniform(120, 130)    # random PM25 value
 
             msg = ""
@@ -228,7 +242,7 @@ if __name__ == '__main__':
             try:
                 client_handler.send((msg + '\n').encode('ascii'))
             except Exception as e:
-                BTError.print_error(handler=client_handler, error=BTError.ERR_WRITE, error_message=repr(e))
+                BTError.print_error(handler=client_handler, oerrr=BTError.ERR_WRITE, error_message=repr(e))
                 client_handler.handle_close()
 
 
