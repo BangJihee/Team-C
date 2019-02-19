@@ -65,26 +65,6 @@ if __name__ == '__main__':
     #Create table
     #c.execute("CREATE TABLE IF NOT EXISTS HISTORY Data")
 
-    for i in range(4):
-        gpio.pinMode(gpiopins[i], gpio.OUTPUT)
-    #c0 temp
-    gpio.digitalWrite(gpiopins[0], 0)
-    sleep(0.5)
-    gpio.digitalWrite(gpiopins[1], 0)
-    sleep(0.5)
-    gpio.digitalWrite(gpiopins[2], 0)
-    sleep(0.5)
-    gpio.digitalWrite(gpiopins[3], 0)
-    sleep(0.5)
-
-    raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
-    scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
-    v = raw * scale
-    t = (v - 500) / 10 - 6
-    #Celsius to Fehrenheit formula
-    t= t*1.8 + 32
-    print(t)
-    sleep(1)
 
     while True:
         for client_handler in server.active_client_handlers.copy():
@@ -160,7 +140,7 @@ if __name__ == '__main__':
             c3 = raw * scale
             print(c3)
 
-            SN1 = ((c2 - 290) - ((0.75) * (c3 - 280))) * 4.386
+            SN1 = ((c2 - 290) - ((1.18) * (c3 - 280))) * 4.386
             SN1 = SN1 if (SN1 >= 0) else -SN1
             print("NO2 _SN1 : {}".format(SN1))
 
@@ -195,7 +175,7 @@ if __name__ == '__main__':
             print(c5)
 
 
-            SN2 = ((c4 - 390) - ((0.75) * (c5 - 390))) * 2.5
+            SN2 = ((c4 - 390) - ((0.18) * (c5 - 390))) * 2.5
             SN2 = SN2 if (SN2 >= 0) else -SN2
             print("O3 _SN2 : {}".format(SN2))
 
@@ -231,7 +211,7 @@ if __name__ == '__main__':
             c7 = raw * scale
             print(c7)
 
-            SN3 =((c6 - 350) - ((0.75) * (c7 - 280))) * 0.03
+            SN3 =((c6 - 350) - ((0.03) * (c7 - 280))) * 0.03
             SN3 = SN3 if (SN3 >= 0) else -SN3
             print("CO_SN3 : {}".format(SN3))
 
@@ -266,7 +246,7 @@ if __name__ == '__main__':
             c9 = raw * scale
             print(c9)
 
-            SN4 =((c8 - 345) - ((0.6) * (c9 - 250))) * 3.2
+            SN4 =((c8 - 345) - ((1.15) * (c9 - 250))) * 3.2
             SN4 = SN4 if (SN4 >= 0) else -SN4
             print("SO2_SN4 : {}".format(SN4))
 
@@ -303,5 +283,5 @@ if __name__ == '__main__':
             # User can close the connection if user are done with it
             conn.close()
 
-            # Sleep for 2 seconds
-        sleep(2)
+            # Sleep for 1 seconds
+        sleep(1)

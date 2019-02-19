@@ -59,7 +59,6 @@ if __name__ == '__main__':
     t= t*1.8 + 32
 
     print(t)
-
     sleep(1)
 
 
@@ -107,5 +106,5 @@ if __name__ == '__main__':
                 BTError.print_error(handler=client_handler, error=BTError.ERR_WRITE, error_message=repr(e))
                 client_handler.handle_close()
 
-            # Sleep for 2 seconds
-        sleep(2)
+            # Sleep for 1 seconds
+        sleep(1)
