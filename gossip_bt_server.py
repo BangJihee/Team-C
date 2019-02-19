@@ -64,9 +64,9 @@ if __name__ == '__main__':
         # Create table
         # Time | Temp   | SN1    | SN2   | SN3    | SN4    | PM25
         # in  | r_data | r_data | r_data| r_data | r_data | r_data
-    db_c.execute(
-        "CREATE TABLE IF NOT EXISTS HISTORY Data { } r_data,{ } r_data,{ } r_data,{ } r_data,{ } r_data,{ } r_data,{ } r_data,").format(sensor_type[0], sensor_type[1], sensor_type[2], sensor_type[3], sensor_type[4], sensor_type[5],
-        sensor_type[6])
+     #db_c.execute(
+     #   "CREATE TABLE IF NOT EXISTS HISTORY Data { } r_data,{ } r_data,{ } r_data,{ } r_data,{ } r_data,{ } r_data,{ } r_data,").format(sensor_type[0], sensor_type[1], sensor_type[2], sensor_type[3], sensor_type[4], sensor_type[5],
+     #   sensor_type[6])
 
 
     #def sensor_output():
@@ -302,13 +302,13 @@ if __name__ == '__main__':
 
 
             # Insert a row of data
-            db_c.execute("INSERT INTO history data {},{},{},{},{},{},{}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25))
+            #db_c.execute("INSERT INTO history data {},{},{},{},{},{},{}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25))
 
             # Save (commit) the changes
-            db_conn.commit()
+            #db_conn.commit()
 
             # User can close the connection if user are done with it
-            db_conn.close()
+            #db_conn.close()
 
             # Sleep for 1 seconds
         sleep(1)
