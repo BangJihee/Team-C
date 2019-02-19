@@ -258,8 +258,27 @@ if __name__ == '__main__':
             SN4 = SN4 if (SN4 >= 0) else -SN4
             print("SO2_SN4 : {}".format(SN4))
 
+
             #PM sensor
-            PM25 = uniform(120, 130)    # random PM25 value
+
+            # c11
+            gpio.digitalWrite(gpiopins[0], 0)
+            sleep(0.5)
+            gpio.digitalWrite(gpiopins[1], 0)
+            sleep(0.5)
+            gpio.digitalWrite(gpiopins[2], 1)
+            sleep(0.5)
+            gpio.digitalWrite(gpiopins[3], 1)
+            sleep(0.5)
+
+            raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
+            scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
+            c11 = (raw * scale)/1000
+            print(c11)
+
+            PM25 = (240.0*pow(c11,6) - 2491.3*pow(c11,5) + 9448.7*pow(c11,4) - 14840.0*pow(c11,3) + 10684.0*pow(c11,2) + 2211.8*c11 + 7.9623)
+            PM25 = PM25 if (SN4 >= 0) else -PM25
+            print("SO2_SN4 : {}".format(SN4))
 
             msg = ""
 
