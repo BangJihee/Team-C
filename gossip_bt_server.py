@@ -281,7 +281,7 @@ if __name__ == '__main__':
             print("SO2_SN4 : {}".format(SN4))
 
             msg = ""
-
+            
             if args.output_format == "json":
                 output = {'type': 'realtime',
                           'time': epoch_time,
