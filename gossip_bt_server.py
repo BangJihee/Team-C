@@ -4,7 +4,6 @@ from neo import Gpio
 import argparse
 import asyncore
 import json
-from random import uniform
 from threading import Thread
 from time import sleep, time
 import logging
@@ -272,7 +271,7 @@ while True:
 
             if args.output_format == "json":
                 output = {'type': 'realtime',
-                          'time': epoch_time,
+                          'time': datetime_object
                           'temp': t, #real temperature
                           'SN1': SN1, #NO2
                           'SN2': SN2, #O3
