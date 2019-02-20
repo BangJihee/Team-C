@@ -290,7 +290,6 @@ while True:
 
             def PM25(num):
                 if 0.0 <= num and num >= 12.0:
-                    print(type(num))
                     return AQI_CALCULATION(0, 50, 0.0, 12.0, num)
                 elif 12.1<=num and num>=35.4 :
                     return AQI_CALCULATION(51, 100, 12.1, 35.4, num)
@@ -360,8 +359,8 @@ while True:
             AQI_O3 = O3(SN2)
             AQI_CO = CO(SN3)
             AQI_SO2 = SO2(SN4)
-            print(type(PM25))
-            AQI_PM25 = PM25(PM25)
+            #print(type(PM25))
+            #AQI_PM25 = PM25(PM25)
 
 
 
