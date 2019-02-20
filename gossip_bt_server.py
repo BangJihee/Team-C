@@ -287,7 +287,7 @@ while True:
                     return AQI_CALCULATION(151, 200, 301, 649, num)
                 elif 106 <= num and num >= 200:
                     return AQI_CALCULATION(201, 300, 106, 200, num)
-            '''
+
             def PM25(num):
                 if 0.0 <= num and num >= 12.0:
                     return AQI_CALCULATION(0, 50, 0.0, 12.0, num)
@@ -303,7 +303,7 @@ while True:
                     return AQI_CALCULATION(301, 400, 250.5, 350.4, num)
                 elif 350.5<=num and num >=500.4:
                     return AQI_CALCULATION(401, 500, 350.5, 500.4, num)
-
+            '''
 
             def CO(num):
                 if 0<=num and num>=4.4:
@@ -360,8 +360,7 @@ while True:
             print(AQI_O3)
             #AQI_CO = CO(SN3)
             #AQI_SO2 = SO2(SN4)
-            #print(type(PM25))
-            #AQI_PM25 = PM25(PM25)
+            AQI_PM25 = PM25(PM25)
 
 
 
@@ -378,15 +377,15 @@ while True:
                           'SN4': SN4, #SO2
                           'PM25': PM25,
                           #'A_SN1': AQI_NO2,
-                          'A_SN2': AQI_O3
+                          'A_SN2': AQI_O3,
                           #'A_SN3': AQI_CO,
                           #'A_SN4': AQI_SO2
-                   # 'A_PM25': AQI_PM25,
+                          'A_PM25': AQI_PM25
 
                 }
                 msg = json.dumps(output)
             elif args.output_format == "csv":
-                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25 ,AQI_O3)#AQI_NO2,AQI_O3,AQI_CO,AQI_SO2,AQI_PM25)
+                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{} ".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25 ,AQI_O3,AQI_PM25)#AQI_NO2,AQI_O3,AQI_CO,AQI_SO2,AQI_PM25)
             try:
                 client_handler.send((msg + '\n').encode('ascii'))
             except Exception as e:
