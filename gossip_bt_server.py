@@ -224,8 +224,6 @@ while True:
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c8 = raw * scale
 
-
-
             #c9
             for i in range(4):
                 gpio.pinMode(gpiopins[i], gpio.OUTPUT)
@@ -271,7 +269,7 @@ while True:
 
             if args.output_format == "json":
                 output = {'type': 'realtime',
-                          'time': datetime_object,
+                          'time': epoch_time,
                           'temp': t, #real temperature
                           'SN1': SN1, #NO2
                           'SN2': SN2, #O3
@@ -280,7 +278,7 @@ while True:
                           'PM25': PM25}
                 msg = json.dumps(output)
             elif args.output_format == "csv":
-                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {}".format(datetime_object, t, SN1, SN2, SN3, SN4, PM25)
+                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25)
             try:
                 client_handler.send((msg + '\n').encode('ascii'))
             except Exception as e:
