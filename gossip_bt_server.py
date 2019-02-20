@@ -97,7 +97,7 @@ while True:
             gpio.digitalWrite(gpiopins[1], 0)
             gpio.digitalWrite(gpiopins[2], 0)
             gpio.digitalWrite(gpiopins[3], 0)
-            sleep(0.5)
+            sleep(0.05)
 
             # real-time temperature
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
@@ -123,7 +123,7 @@ while True:
             gpio.digitalWrite(gpiopins[1], 1)
             gpio.digitalWrite(gpiopins[2], 0)
             gpio.digitalWrite(gpiopins[3], 0)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -137,7 +137,7 @@ while True:
             gpio.digitalWrite(gpiopins[2], 0)
             gpio.digitalWrite(gpiopins[3], 0)
 
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -155,7 +155,7 @@ while True:
             gpio.digitalWrite(gpiopins[1], 0)
             gpio.digitalWrite(gpiopins[2], 1)
             gpio.digitalWrite(gpiopins[3], 0)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -169,7 +169,7 @@ while True:
             gpio.digitalWrite(gpiopins[1], 0)
             gpio.digitalWrite(gpiopins[2], 1)
             gpio.digitalWrite(gpiopins[3], 0)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -188,7 +188,7 @@ while True:
             gpio.digitalWrite(gpiopins[1], 1)
             gpio.digitalWrite(gpiopins[2], 1)
             gpio.digitalWrite(gpiopins[3], 0)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -203,7 +203,7 @@ while True:
             gpio.digitalWrite(gpiopins[1], 1)
             gpio.digitalWrite(gpiopins[2], 1)
             gpio.digitalWrite(gpiopins[3], 0)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -221,7 +221,7 @@ while True:
             gpio.digitalWrite(gpiopins[1], 0)
             gpio.digitalWrite(gpiopins[2], 0)
             gpio.digitalWrite(gpiopins[3], 1)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -234,7 +234,7 @@ while True:
             gpio.digitalWrite(gpiopins[1], 0)
             gpio.digitalWrite(gpiopins[2], 0)
             gpio.digitalWrite(gpiopins[3], 1)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -255,7 +255,7 @@ while True:
             gpio.digitalWrite(gpiopins[1], 1)
             gpio.digitalWrite(gpiopins[2], 0)
             gpio.digitalWrite(gpiopins[3], 1)
-            sleep(0.5)
+            sleep(0.05)
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
@@ -424,4 +424,4 @@ while True:
             # Sleep for 1 seconds
             print("")
             print("")
-        sleep(4.5)
+        sleep(2.5)
