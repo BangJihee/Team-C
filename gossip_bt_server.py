@@ -375,13 +375,13 @@ while True:
             #        return o.isoformat()
             #    return json.dumps(item,sort_keys=True,indent=1,default=default)
 
-            def myconverter(o):
-                if isinstance(o,datetime.datetime):
-                    return o.__str__()
+            # def myconverter(o):
+            #     if isinstance(o,datetime.datetime):
+            #         return o.__str__()
 
             if args.output_format == "json":
                 output = {
-                          'time': datetime,
+                          'time': str(datetime.now()),
                           'temp': t, #real temperature
                           'SN1': SN1, #NO2
                           'SN2': SN2, #O3
@@ -397,8 +397,8 @@ while True:
                 }
                 msg = json.dumps(output)
 
-                output['date']=datetime.datetime.now()
-                print(json.dumps(output,defalut=myconverter))
+                #output['date']=datetime.datetime.now()
+                #print(json.dumps(output,defalut=myconverter))
 
             elif args.output_format == "csv":
                 msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(datetime, t, SN1, SN2, SN3, SN4 ,PM25,AQI_NO2,AQI_O3,AQI_CO,AQI_SO2, AQI_PM25)
