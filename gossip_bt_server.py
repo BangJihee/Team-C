@@ -10,7 +10,7 @@ import logging
 import sqlite3
 from json import dumps
 from datetime import datetime
-from json import dumps
+import datetime
 
 
 logger= logging.getLogger(__name__)
@@ -370,13 +370,20 @@ while True:
             AQI_PM25 = A_PM25(PM25)
             print("AQI_PM25: {}".format(AQI_PM25))
 
+            #def default(o):
+            #    if isinstance(o,(datetime.date, datetime.datetime)):
+            #        return o.isoformat()
+            #    return json.dumps(item,sort_keys=True,indent=1,default=default)
 
-            #now = datetime.now()
-            #now = dumps(datetime.now(), default=json_serial)
+            def myconverter(o):
+                if isinstance(o,datetime.datetime):
+                    return o.__str__()
+
+            print(json.dumps(output, defalut=myconverter))
 
             if args.output_format == "json":
                 output = {
-                          'time': epoch_time,
+                          'time': datetime,
                           'temp': t, #real temperature
                           'SN1': SN1, #NO2
                           'SN2': SN2, #O3
@@ -391,8 +398,12 @@ while True:
 
                 }
                 msg = json.dumps(output)
+
+                output['date']=datetime.datetime.now()
+                print(json.dumps(output,defalut=myconverter))
+
             elif args.output_format == "csv":
-                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(epoch_time, t, SN1, SN2, SN3, SN4 ,AQI_NO2,AQI_O3,AQI_O3,AQI_CO,AQI_SO2, AQI_PM25)
+                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(datetime, t, SN1, SN2, SN3, SN4 ,AQI_NO2,AQI_O3,AQI_O3,AQI_CO,AQI_SO2, AQI_PM25)
             try:
                 client_handler.send((msg + '\n').encode('ascii'))
             except Exception as e:
