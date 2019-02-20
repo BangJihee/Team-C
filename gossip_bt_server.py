@@ -42,7 +42,7 @@ if __name__ == '__main__':
     gpiopins=[24,25,26,27]
     gpio = Gpio()
 
-    num = [0, 0, 0, 0]
+    pinnum = [0, 0, 0, 0]
     #sensor_type=['Temp','NO2','O3','CO','SO2','PM25']
 
     # Using A0 pin
