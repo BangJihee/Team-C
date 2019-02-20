@@ -272,7 +272,7 @@ while True:
             #AQI Conversion
 
             def AQI_CALCULATION(Imin, Imax, Cmin, Cmax, Input):
-                Result = ((Imax - Imin) / (Cmax - Cmin)) * (Input - Cmin) + Imin
+                Result = ((float(Imax) - float(Imin)) / (float(Cmax) - float(Cmin))) * (float(Input) - float(Cmin)) + float(Imin)
                 return Result
 
 
