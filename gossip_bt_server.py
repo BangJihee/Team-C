@@ -424,4 +424,4 @@ while True:
             # Sleep for 1 seconds
             print("")
             print("")
-        sleep(2.5)
+        sleep(30)
