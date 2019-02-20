@@ -271,7 +271,7 @@ while True:
 
             if args.output_format == "json":
                 output = {'type': 'realtime',
-                          'time': datetime_object
+                          'time': datetime_object,
                           'temp': t, #real temperature
                           'SN1': SN1, #NO2
                           'SN2': SN2, #O3
