@@ -411,7 +411,6 @@ while True:
                 BTError.print_error(handler=client_handler, oerrr=BTError.ERR_WRITE, error_message=repr(e))
                 client_handler.handle_close()
 
-
             # Insert a row of data
             #db_c.execute("INSERT INTO history data {},{},{},{},{},{},{}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25))
 
