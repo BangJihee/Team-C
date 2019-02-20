@@ -291,34 +291,34 @@ while True:
             def PM25(num):
                 if 0.0 <= num and num >= 12.0:
                     return AQI_CALCULATION(0, 50, 0.0, 12.0, num)
-                elif 12.1<=num and num>=35.4 :
+                elif 12.1<=num and num>=35.4:
                     return AQI_CALCULATION(51, 100, 12.1, 35.4, num)
-                elif 35.5<=num and num >=55.4 :
+                elif 35.5<=num and num >=55.4:
                     return AQI_CALCULATION(101, 150, 35.5, 55.4, num)
-                elif 55.5<=num and num >=150.4 :
+                elif 55.5<=num and num >=150.4:
                     return AQI_CALCULATION(151, 200, 55.5, 150.4, num)
-                elif 150.5<=num and num >=250.4 :
+                elif 150.5<=num and num >=250.4:
                     return AQI_CALCULATION(201, 300,150.5, 250.4, num)
-                elif 250.5<=num and num >=350.4 :
+                elif 250.5<=num and num >=350.4:
                     return AQI_CALCULATION(301, 400, 250.5, 350.4, num)
-                elif 350.5<=num and num >=500.4 :
+                elif 350.5<=num and num >=500.4:
                     return AQI_CALCULATION(401, 500, 350.5, 500.4, num)
 
 
             def CO(num):
-                if 0<=num and num>=4.4 :
+                if 0<=num and num>=4.4:
                     return AQI_CALCULATION(0, 50, 0, 4.4, num)
-                elif 4.5<=num and num>=9.4 :
+                elif 4.5<=num and num>=9.4:
                     return AQI_CALCULATION(51, 100, 4.5, 9.4, num)
-                elif 9.5<=num and num >=12.4 :
+                elif 9.5<=num and num >=12.4:
                     return AQI_CALCULATION(101, 150, 9.5, 12.4, num)
-                elif 12.5<=num and num >=15.4 :
+                elif 12.5<=num and num >=15.4:
                     return AQI_CALCULATION(151, 200, 12.5, 15.4, num)
-                elif 15.5<=num and num >=30.4 :
+                elif 15.5<=num and num >=30.4:
                     return AQI_CALCULATION(201, 300, 15.5, 30.4, num)
-                elif 30.5<=num and num >=40.4 :
+                elif 30.5<=num and num >=40.4:
                     return AQI_CALCULATION(301, 400, 30.5, 40.4, num)
-                elif 40.5<=num and num >=50.4 :
+                elif 40.5<=num and num >=50.4:
                     return AQI_CALCULATION(401, 500, 40.5, 50.4, num)
 
 
@@ -376,10 +376,10 @@ while True:
                           'SN3': SN3, #CO
                           'SN4': SN4, #SO2
                           'PM25': PM25,
-                    'A_SN1' : AQI_NO2,
-                    'A_SN2': AQI_O3,
-                    'A_SN3': AQI_CO,
-                    'A_SN4': AQI_SO2
+                          'A_SN1': AQI_NO2,
+                          'A_SN2': AQI_O3,
+                          'A_SN3': AQI_CO,
+                          'A_SN4': AQI_SO2
                    # 'A_PM25': AQI_PM25,
 
                 }
