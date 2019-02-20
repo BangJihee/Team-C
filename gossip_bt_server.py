@@ -299,4 +299,6 @@ while True:
             #db_conn.close()
 
             # Sleep for 1 seconds
+            print("")
+            print("")
         sleep(4.5)
