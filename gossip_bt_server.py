@@ -378,10 +378,12 @@ while True:
             # def myconverter(o):
             #     if isinstance(o,datetime.datetime):
             #         return o.__str__()
+            now_str = ""
 
+            datetime.datetime.strptime(now_str, "%Y-%m-%dT%H:%M:%S.%f+00:00").replace(tzinfo=datetime.timezone.utc)
             if args.output_format == "json":
                 output = {
-                          'time': str(datetime.now()),
+                          'time': now_str,
                           'temp': t, #real temperature
                           'SN1': SN1, #NO2
                           'SN2': SN2, #O3
