@@ -288,7 +288,7 @@ while True:
                 elif 106 <= num and num >= 200:
                     return AQI_CALCULATION(201, 300, 106, 200, num)
 
-            def PPM25(num):
+            def A_PM25(num):
                 if 0.0 <= num and num >= 12.0:
                     return AQI_CALCULATION(0, 50, 0.0, 12.0, num)
                 elif 12.1<=num and num>=35.4:
@@ -367,7 +367,7 @@ while True:
             AQI_SO2 = SO2(SN4)
             print("AQI_SO2 : {}".format(AQI_SO2))
 
-            AQI_PM25 = PPM25(PM25)
+            AQI_PM25 = A_PM25(PM25)
             print("AQI_PM25: {}".format(AQI_PM25))
 
 
