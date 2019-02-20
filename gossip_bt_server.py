@@ -357,6 +357,7 @@ while True:
             '''
             #AQI_NO2 = NO2(SN1)
             AQI_O3 = O3(SN2)
+            print(AQI_O3)
             #AQI_CO = CO(SN3)
             #AQI_SO2 = SO2(SN4)
             #print(type(PM25))
