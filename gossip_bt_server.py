@@ -8,7 +8,9 @@ from threading import Thread
 from time import sleep, time
 import logging
 import sqlite3
+
 from datetime import datetime
+from json import dumps
 
 logger= logging.getLogger(__name__)
 #Allows the application log to integrate its own messages with messages from third module
@@ -267,7 +269,9 @@ while True:
 
 
             #AQI Conversion
+
             now = datetime.now();
+
             if args.output_format == "json":
                 output = {
                           'time': now,
@@ -279,7 +283,7 @@ while True:
                           'PM25': PM25}
                 msg = json.dumps(output)
             elif args.output_format == "csv":
-                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25)
+                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {}".format(now, t, SN1, SN2, SN3, SN4, PM25)
             try:
                 client_handler.send((msg + '\n').encode('ascii'))
             except Exception as e:
