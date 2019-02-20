@@ -109,7 +109,7 @@ while True:
             # Celsius to Fehrenheit formula
             t = t * 1.8 + 32
 
-            print("Temp: {}F".format(t))
+            print("Temp: {} F".format(t))
 
             #Sensor read the value
             #logger.info("Reading sensor :{}".format(sensor_type[0],t))
@@ -268,7 +268,7 @@ while True:
 
             msg = ""
 
-
+            '''
             #AQI Conversion
 
             def AQI_CALCULATION(Imin, Imax, Cmin, Cmax, Input):
@@ -363,7 +363,7 @@ while True:
             #AQI_PM25 = PM25(PM25)
 
 
-
+            '''
             #now = datetime.now()
             #now = dumps(datetime.now(), default=json_serial)
 
@@ -375,17 +375,17 @@ while True:
                           'SN2': SN2, #O3
                           'SN3': SN3, #CO
                           'SN4': SN4, #SO2
-                          'PM25': PM25,
-                          'A_SN1': AQI_NO2,
-                          'A_SN2': AQI_O3,
-                          'A_SN3': AQI_CO,
-                          'A_SN4': AQI_SO2
+                          'PM25': PM25
+                          #'A_SN1': AQI_NO2,
+                          #'A_SN2': AQI_O3,
+                          #'A_SN3': AQI_CO,
+                          #'A_SN4': AQI_SO2
                    # 'A_PM25': AQI_PM25,
 
                 }
                 msg = json.dumps(output)
             elif args.output_format == "csv":
-                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{} ,{} ,{}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25 ,AQI_NO2,AQI_O3,AQI_CO,AQI_SO2)#,AQI_PM25)
+                msg = "Time:{}, {}, {}, {}, {}, {}, {}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25)#AQI_NO2,AQI_O3,AQI_CO,AQI_SO2,AQI_PM25)
             try:
                 client_handler.send((msg + '\n').encode('ascii'))
             except Exception as e:
