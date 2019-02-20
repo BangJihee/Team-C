@@ -378,12 +378,24 @@ while True:
             # def myconverter(o):
             #     if isinstance(o,datetime.datetime):
             #         return o.__str__()
-            now_str = ""
+            def dt_to_json(obj):
+                if isinstance(obj, datetime.datetime):
+                    return {
+                        "__type__": "datetime",
+                        "year": obj.year,
+                        "month": obj.month,
+                        "day": obj.day,
+                        "hour": obj.hour,
+                        "minute": obj.minute,
+                        "second": obj.second,
+                        "microsecond": obj.microsecond,
+                        "tz": (obj.tzinfo.tzname(obj), obj.utcoffset().total_seconds())
+                    }
+                else:
+                    raise TypeError("Cant serialize {}".format(obj))
 
-            datetime.datetime.strptime(now_str, "%Y-%m-%dT%H:%M:%S.%f+00:00").replace(tzinfo=datetime.timezone.utc)
             if args.output_format == "json":
                 output = {
-                          'time': now_str,
                           'temp': t, #real temperature
                           'SN1': SN1, #NO2
                           'SN2': SN2, #O3
@@ -398,12 +410,13 @@ while True:
 
                 }
                 msg = json.dumps(output)
-
+                nowtime = datetime.datetime.now(datetime.timezone.utc)
+                json.dumps(nowtime, default=dt_to_json())
                 #output['date']=datetime.datetime.now()
                 #print(json.dumps(output,defalut=myconverter))
 
             elif args.output_format == "csv":
-                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(now_str, t, SN1, SN2, SN3, SN4 ,PM25,AQI_NO2,AQI_O3,AQI_CO,AQI_SO2, AQI_PM25)
+                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(epoch_time, t, SN1, SN2, SN3, SN4 ,PM25,AQI_NO2,AQI_O3,AQI_CO,AQI_SO2, AQI_PM25)
             try:
                 client_handler.send((msg + '\n').encode('ascii'))
             except Exception as e:
