@@ -411,7 +411,7 @@ while True:
                 }
                 msg = json.dumps(output)
                 nowtime = datetime.datetime.now(datetime.timezone.utc)
-                json.dumps(nowtime, default=dt_to_json())
+                json.dumps(nowtime, default=dt_to_json(nowtime))
                 #output['date']=datetime.datetime.now()
                 #print(json.dumps(output,defalut=myconverter))
 
