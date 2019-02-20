@@ -8,7 +8,7 @@ from threading import Thread
 from time import sleep, time
 import logging
 import sqlite3
-import datetime
+from datetime import datetime
 
 logger= logging.getLogger(__name__)
 #Allows the application log to integrate its own messages with messages from third module
@@ -82,7 +82,7 @@ while True:
             # Create CSV message "'realtime', time, temp, SN1, SN2, SN3, SN4, PM25\n"
 
             #time
-            datetime_object = datetime.datetime.now()
+
             epoch_time = int(time())
 
             #sensor_output['TIme'] = epoch_time
@@ -266,10 +266,10 @@ while True:
             msg = ""
 
             #AQI Conversion
-
+            now = datetime.now();
             if args.output_format == "json":
-                output = {'type': 'realtime',
-                          'time': epoch_time,
+                output = {
+                          'time': now,
                           'temp': t, #real temperature
                           'SN1': SN1, #NO2
                           'SN2': SN2, #O3
