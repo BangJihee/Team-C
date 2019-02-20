@@ -379,7 +379,7 @@ while True:
                     'A_SN1' : AQI_NO2,
                     'A_SN2': AQI_O3,
                     'A_SN3': AQI_CO,
-                    'A_SN4': AQI_SO2
+                    'A_SN4': AQI_SO2,
                    # 'A_PM25': AQI_PM25,
 
                 }
