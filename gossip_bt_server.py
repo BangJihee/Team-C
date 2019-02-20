@@ -220,7 +220,7 @@ while True:
             gpio.digitalWrite(gpiopins[3], 1)
             sleep(0.05)
 
-            raw = int(open("/sys/bus/iio/devices/iio:device0/in _voltage0_raw").read())
+            raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c8 = raw * scale
 
