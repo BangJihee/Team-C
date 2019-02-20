@@ -287,8 +287,8 @@ while True:
                     return AQI_CALCULATION(151, 200, 301, 649, num)
                 elif 106 <= num and num >= 200:
                     return AQI_CALCULATION(201, 300, 106, 200, num)
-            '''
-            def PM25(num):
+
+            def PPM25(num):
                 if 0.0 <= num and num >= 12.0:
                     return AQI_CALCULATION(0, 50, 0.0, 12.0, num)
                 elif 12.1<=num and num>=35.4:
@@ -298,12 +298,12 @@ while True:
                 elif 55.5<=num and num >=150.4:
                     return AQI_CALCULATION(151, 200, 55.5, 150.4, num)
                 elif 150.5<=num and num >=250.4:
-                    return AQI_CALCULATION(201, 300,150.5, 250.4, num)
+                    return AQI_CALCULATION(201, 300 ,150.5, 250.4, num)
                 elif 250.5<=num and num >=350.4:
                     return AQI_CALCULATION(301, 400, 250.5, 350.4, num)
                 elif 350.5<=num and num >=500.4:
                     return AQI_CALCULATION(401, 500, 350.5, 500.4, num)
-            '''
+
 
             def CO(num):
                 if 0<=num and num>=4.4:
@@ -367,8 +367,8 @@ while True:
             AQI_SO2 = SO2(SN4)
             print("AQI_SO2 : {}".format(AQI_SO2))
 
-            #AQI_PM25 = PM25(PM25)
-
+            AQI_PM25 = PPM25(PM25)
+            print("AQI_PM25: {}".format(AQI_PM25))
 
 
             #now = datetime.now()
@@ -386,13 +386,13 @@ while True:
                           'A_SN1': AQI_NO2,
                           'A_SN2': AQI_O3,
                           'A_SN3': AQI_CO,
-                          'A_SN4': AQI_SO2
-                          #'A_PM25': AQI_PM25
+                          'A_SN4': AQI_SO2,
+                          'A_PM25': AQI_PM25
 
                 }
                 msg = json.dumps(output)
             elif args.output_format == "csv":
-                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} ".format(epoch_time, t, SN1, SN2, SN3, SN4 ,AQI_NO2,AQI_O3,AQI_O3,AQI_CO,AQI_SO2)
+                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(epoch_time, t, SN1, SN2, SN3, SN4 ,AQI_NO2,AQI_O3,AQI_O3,AQI_CO,AQI_SO2, AQI_PM25)
             try:
                 client_handler.send((msg + '\n').encode('ascii'))
             except Exception as e:
