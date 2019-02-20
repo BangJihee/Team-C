@@ -265,6 +265,7 @@ while True:
 
             msg = ""
 
+
             #AQI Conversion
             now = datetime.now();
             if args.output_format == "json":
