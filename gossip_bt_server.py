@@ -9,7 +9,7 @@ from threading import Thread
 from time import sleep, time
 import logging
 import sqlite3
-
+import datetime
 
 logger= logging.getLogger(__name__)
 #Allows the application log to integrate its own messages with messages from third module
@@ -41,7 +41,7 @@ if __name__ == '__main__':
     gpio = Gpio()
 
     num = [0, 0, 0, 0]
-    sensor_type=['Temp','NO2','O3','CO','SO2','PM25']
+    #sensor_type=['Temp','NO2','O3','CO','SO2','PM25']
 
     # Using A0 pin
     #raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
@@ -83,7 +83,9 @@ while True:
             # Create CSV message "'realtime', time, temp, SN1, SN2, SN3, SN4, PM25\n"
 
             #time
+            datetime_object = datetime.datetime.now()
             epoch_time = int(time())
+
             #sensor_output['TIme'] = epoch_time
 
             for i in range(4):
@@ -170,7 +172,6 @@ while True:
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c5 = raw * scale
-
 
 
             SN2 = ((c4 -408 ) - ((0.18) * (c5 - 403))) / 0.256
@@ -267,18 +268,20 @@ while True:
 
             msg = ""
 
+            #AQI Conversion
+
             if args.output_format == "json":
                 output = {'type': 'realtime',
                           'time': epoch_time,
-                          'temp': t,
-                          'SN1': SN1,
-                          'SN2': SN2,
-                          'SN3': SN3,
-                          'SN4': SN4,
+                          'temp': t, #real temperature
+                          'SN1': SN1, #NO2
+                          'SN2': SN2, #O3
+                          'SN3': SN3, #CO
+                          'SN4': SN4, #SO2
                           'PM25': PM25}
                 msg = json.dumps(output)
             elif args.output_format == "csv":
-                msg = "realtime, {}, {}, {}, {}, {}, {}, {}".format(epoch_time, t, SN1, SN2, SN3, SN4, PM25)
+                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {}".format(datetime_object, t, SN1, SN2, SN3, SN4, PM25)
             try:
                 client_handler.send((msg + '\n').encode('ascii'))
             except Exception as e:
