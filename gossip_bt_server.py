@@ -378,25 +378,17 @@ while True:
             # def myconverter(o):
             #     if isinstance(o,datetime.datetime):
             #         return o.__str__()
-            def dt_to_json(obj):
-                if isinstance(obj, datetime.datetime):
-                    return {
-                        "__type__": "datetime",
-                        "year": obj.year,
-                        "month": obj.month,
-                        "day": obj.day,
-                        "hour": obj.hour,
-                        "minute": obj.minute,
-                        "second": obj.second,
-                        "microsecond": obj.microsecond,
-                        "tz": (obj.tzinfo.tzname(obj), obj.utcoffset().total_seconds())
-                    }
-                else:
-                    raise TypeError("Cant serialize {}".format(obj))
 
+            nowtime = datetime.datetime.now()
             if args.output_format == "json":
                 output = {
-                          'temp': t, #real temperature
+                          "year": nowtime.year,
+                          "month": nowtime.month,
+                          "day": nowtime.day,
+                          "hour": nowtime.hour,
+                          "minute": nowtime.minute,
+                          "second": nowtime.second,
+                          "temp": t,
                           'SN1': SN1, #NO2
                           'SN2': SN2, #O3
                           'SN3': SN3, #CO
@@ -410,10 +402,6 @@ while True:
 
                 }
                 msg = json.dumps(output)
-                nowtime = datetime.datetime.now(datetime.timezone.utc)
-                json.dumps(nowtime, default=dt_to_json(nowtime))
-                #output['date']=datetime.datetime.now()
-                #print(json.dumps(output,defalut=myconverter))
 
             elif args.output_format == "csv":
                 msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(epoch_time, t, SN1, SN2, SN3, SN4 ,PM25,AQI_NO2,AQI_O3,AQI_CO,AQI_SO2, AQI_PM25)
