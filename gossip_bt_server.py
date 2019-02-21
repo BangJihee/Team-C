@@ -855,7 +855,7 @@ if __name__ == '__main__':
                 "hour": nowtime.hour,
                 "minute": nowtime.minute,
                 "second": nowtime.second,
-                "temp": round(t),
+                "temp": t,
                 'SN1': SN1,  # NO2
                 'SN2': SN2,  # O3
                 'SN3': SN3,  # CO
@@ -868,7 +868,6 @@ if __name__ == '__main__':
                 'A_PM25': AQI_PM25
 
             }
-
             msg = json.dumps(output)
         elif args.output_format == "csv":
             msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(datetime, t, SN1, SN2, SN3, SN4,AQI_PM25, AQI_NO2, AQI_O3, AQI_CO,AQI_SO2, AQI_PM25)
