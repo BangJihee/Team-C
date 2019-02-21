@@ -1,4 +1,4 @@
-from btserver import BTServer
+'''from btserver import BTServer
 from bterror import BTError
 from neo import Gpio
 import argparse
@@ -423,4 +423,8 @@ while True:
             # Sleep for 1 seconds
             print("")
             print("")
-        sleep(2.5)
+        sleep(30)
+'''
+import sqlite3
+conn = sqlite3.connect('example.db')
+c = conn.cursor()
