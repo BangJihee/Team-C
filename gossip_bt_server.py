@@ -391,17 +391,17 @@ while True:
                           "hour": nowtime.hour,
                           "minute": nowtime.minute,
                           "second": nowtime.second,
-                          "temp": t,
+                          "temp": round(t,2),
                           'SN1': SN1, #NO2
                           'SN2': SN2, #O3
                           'SN3': SN3, #CO
                           'SN4': SN4, #SO2
-                          'PM25': PM25,
-                          'A_SN1': round(AQI_NO2,3),
-                          'A_SN2': round(AQI_O3,3),
-                          'A_SN3': round(AQI_CO,3),
-                          'A_SN4': round(AQI_SO2,3),
-                          'A_PM25': round(AQI_PM25,3)
+                          'PM25': round(PM25,2),
+                          'A_SN1': round(AQI_NO2,2),
+                          'A_SN2': round(AQI_O3,2),
+                          'A_SN3': round(AQI_CO,2),
+                          'A_SN4': round(AQI_SO2,2),
+                          'A_PM25': round(AQI_PM25,2)
 
                 }
                 msg = json.dumps(output)
