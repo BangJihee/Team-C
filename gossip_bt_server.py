@@ -251,12 +251,12 @@ if __name__ == '__main__':
     # Blink example
     for i in range(4):
         neo.pinMode(gpiopins[i], neo.OUTPUT)
-    # temp=0
-    # SN1=0
-    # SN2=0
-    # SN3=0
-    # SN4=0
-    # PM25=0
+    temp=0
+    SN1=0
+    SN2=0
+    SN3=0
+    SN4=0
+    PM25=0
 
     while True:
         for client_handler in server.active_client_handlers.copy():
@@ -365,6 +365,11 @@ if __name__ == '__main__':
                 "minute": nowtime.minute,
                 "second": nowtime.second,
                 'temp': t,  # real temperature
+                'SN1': SN1,  # NO2
+                'SN2': SN2,  # O3
+                'SN3': SN3,  # CO
+                'SN4': SN4,  # SO2
+                'PM25': PM25,
                 'A_SN1': AQI_NO2,
                 'A_SN2': AQI_O3,
                 'A_SN3': AQI_CO,
