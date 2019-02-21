@@ -295,7 +295,7 @@ while True:
                 elif 55.5<= num <=150.4:
                     return AQI_CALCULATION(151, 200, 55.5, 150.4, num)
                 elif 150.5<= num <=250.4:
-                    return AQI_CALCULATION(201, 300 ,150.5, 250.4, num)
+                    return AQI_CALCULATION(201, 300, 150.5, 250.4, num)
                 elif 250.5<= num <=350.4:
                     return AQI_CALCULATION(301, 400, 250.5, 350.4, num)
                 elif 350.5<= num <=500.4:
