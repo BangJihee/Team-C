@@ -13,7 +13,6 @@ from datetime import datetime
 import datetime
 #import decimal
 
-
 logger= logging.getLogger(__name__)
 #Allows the application log to integrate its own messages with messages from third module
 if __name__ == '__main__':
