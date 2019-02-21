@@ -366,7 +366,7 @@ while True:
             print("AQI_SO2 : {}".format(int(AQI_SO2)))
 
             AQI_PM25 = A_PM25(PM25)
-            print("AQI_PM25: {.2f}".format(AQI_PM25))
+            print("AQI_PM25: {}".format(AQI_PM25))
 
 
             #now = datetime.now()
