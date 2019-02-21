@@ -143,8 +143,10 @@ while True:
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c3 = raw * scale
 
+            print(c2)
+            print(c3)
 
-            SN1 = ((c2 - 290) - ((1.18) * (c3 - 284))) / 0.207
+            SN1 = ((c2 - 220) - ((1.18) * (c3 - 260))) / 0.207
             SN1 = SN1 if (SN1 >= 0) else -SN1
             print("NO2 _SN1 : {}".format(SN1))
 
@@ -260,11 +262,6 @@ while True:
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c11 = (raw * scale)/1000
-
-            print(c11)
-
-            
-
 
             PM25 = float((240.0*pow(c11,6) - 2491.3*pow(c11,5) + 9448.7*pow(c11,4) - 14840.0*pow(c11,3) + 10684.0*pow(c11,2) + 2211.8*c11 + 7.9623))
             PM25 = 0.518 + .00274 * PM25
