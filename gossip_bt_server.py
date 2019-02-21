@@ -704,7 +704,7 @@ if __name__ == '__main__':
     server_thread.daemon = True
     server_thread.start()
 
-    epochtime = datetime.now().strftime('%Y-%m-%d %H:%M:%S') #(int)(time())
+    #epochtime = datetime.now().strftime('%Y-%m-%d %H:%M:%S') #(int)(time())
 
     neo =Gpio()
 
@@ -757,7 +757,8 @@ if __name__ == '__main__':
             SN1 = ((c2 - NO2_WE) - (get_n(t, 'NO2') * (c3 - NO2_AE))) / NO2_alpha
             SN1 = SN1 if (SN1 >= 0) else -SN1
             print("NO2 _SN1 : {}".format(SN1))
-            AQI_NO2=AQI_convert(SN1, 'NO2')
+
+
 
 
             # C4 O3_we
@@ -774,7 +775,7 @@ if __name__ == '__main__':
             SN2 = ((c4 - O3_WE) - (get_n(t, 'O3') * (c5 - O3_AE))) / O3_alpha
             SN2 = SN2 if (SN2 >= 0) else -SN2
             print("O3 _SN2 : {}".format(SN2))
-            AQI_O3 = AQI_convert(SN2, 'O3')
+
 
 
             #C6 CO_wE
@@ -792,7 +793,7 @@ if __name__ == '__main__':
             SN3 = SN3/1000
             SN3 = SN3 if (SN3 >= 0) else -SN3
             print("CO_SN3 : {}".format(SN3))
-            AQI_CO = AQI_convert(SN3, 'CO')
+
 
 
             #C8 SO2_we
@@ -809,7 +810,7 @@ if __name__ == '__main__':
             SN4 = ((c8 - SO2_WE) - (get_n(t, 'SO2') * (c9 - SO2_AE))) / SO2_alpha
             SN4 = SN4 if (SN4 >= 0) else -SN4
             print("SO2_SN4 : {}".format(SN4))
-            AQI_SO2 = AQI_convert(SN4, 'SO2')
+
 
             #c11 PM2.5
             raw, scale = contol_mux(1,0,1,1)
@@ -825,6 +826,10 @@ if __name__ == '__main__':
             print("PM25 : {}".format(PM25))
             print("\n")
 
+            AQI_NO2 = AQI_convert(SN1, 'NO2')
+            AQI_O3 = AQI_convert(SN2, 'O3')
+            AQI_CO = AQI_convert(SN3, 'CO')
+            AQI_SO2 = AQI_convert(SN4, 'SO2')
 
             print("AQI_NO2:{} ".format(int(AQI_NO2)))
             print("AQI_O3:{}".format(int(AQI_O3)))
@@ -858,7 +863,7 @@ if __name__ == '__main__':
 
                 msg = json.dumps(output)
             elif args.output_format == "csv":
-                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(epochtime, t, SN1, SN2, SN3, SN4,PM25, AQI_NO2, AQI_O3, AQI_CO,AQI_SO2, AQI_PM25)
+                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(datetime, t, SN1, SN2, SN3, SN4,AQI_PM25, AQI_NO2, AQI_O3, AQI_CO, AQI_SO2, AQI_PM25)
             try:
                 client_handler.send((msg + '\n').encode('ascii'))
             except Exception as e:
