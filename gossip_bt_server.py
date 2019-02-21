@@ -732,6 +732,11 @@ if __name__ == '__main__':
         neo.pinMode(gpiopins[i], neo.OUTPUT)
 
     temp=0
+    SN1=0
+    SN2=0
+    SN3=0
+    SN4=0
+    
     while True:
         for client_handler in server.active_client_handlers.copy():
 
