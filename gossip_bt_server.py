@@ -281,7 +281,7 @@ while True:
                 elif 71 <= num <= 85:
                     return AQI_CALCULATION(101, 150, 71, 85, num)
                 elif 86 <= num <=105:
-                    return AQI_CALCULATION(151, 200, 301, 649, num)
+                    return AQI_CALCULATION(151, 200, 86, 105, num)
                 elif 106 <= num <= 200:
                     return AQI_CALCULATION(201, 300, 106, 200, num)
 
@@ -342,9 +342,9 @@ while True:
                 elif 54 <= num <=100:
                     return AQI_CALCULATION(51, 100, 54, 100, num)
                 elif 101 <= num <= 360:
-                    return AQI_CALCULATION(101, 150, 101, 300, num)
+                    return AQI_CALCULATION(101, 150, 101, 360, num)
                 elif 361 <= num <= 649:
-                    return AQI_CALCULATION(151, 200, 301, 649, num)
+                    return AQI_CALCULATION(151, 200, 361, 649, num)
                 elif 650 <= num <= 1249:
                     return AQI_CALCULATION(201, 300, 650, 1249, num)
                 elif 1250 <= num <= 1649:
@@ -352,7 +352,6 @@ while True:
                 elif 1650 <= num <= 2049:
                     return AQI_CALCULATION(401, 500, 1650, 2049, num)
 
-            #"{:.2f}".format(0.1)
 
             AQI_NO2 = NO2(SN1)
             print("AQI_NO2:{} ".format(int(AQI_NO2)))
