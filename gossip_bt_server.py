@@ -205,7 +205,7 @@ while True:
 
             raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
-            c7 = raw * scale
+            c7 = (raw * scale)/1000
 
 
             SN3 =float(((c6 - 298) - ((0.03) * (c7 - 279))) / 0.276)
@@ -274,82 +274,82 @@ while True:
                 return float(Result)
 
             def O3(num):
-                if 0 <= num and num >= 54:
+                if 0 <= num <= 54:
                     return AQI_CALCULATION(0, 50, 0, 54, num)
-                elif 55 <= num and num >= 70:
+                elif 55 <= num<= 70:
                     return AQI_CALCULATION(51, 100, 55, 70, num)
-                elif 71 <= num and num >= 85:
+                elif 71 <= num <= 85:
                     return AQI_CALCULATION(101, 150, 71, 85, num)
-                elif 86 <= num and num >= 105:
+                elif 86 <= num <=105:
                     return AQI_CALCULATION(151, 200, 301, 649, num)
-                elif 106 <= num and num >= 200:
+                elif 106 <= num <= 200:
                     return AQI_CALCULATION(201, 300, 106, 200, num)
 
             def A_PM25(num):
-                if 0.0 <= num and num >= 12.0:
+                if 0.0 <= num <= 12.0:
                     return AQI_CALCULATION(0, 50, 0.0, 12.0, num)
-                elif 12.1<=num and num>=35.4:
+                elif 12.1<= num <=35.4:
                     return AQI_CALCULATION(51, 100, 12.1, 35.4, num)
-                elif 35.5<=num and num >=55.4:
+                elif 35.5<= num <=55.4:
                     return AQI_CALCULATION(101, 150, 35.5, 55.4, num)
-                elif 55.5<=num and num >=150.4:
+                elif 55.5<= num <=150.4:
                     return AQI_CALCULATION(151, 200, 55.5, 150.4, num)
-                elif 150.5<=num and num >=250.4:
-                    return AQI_CALCULATION(201, 300 ,150.5, 250.4, num)
-                elif 250.5<=num and num >=350.4:
+                elif 150.5<= num <=250.4:
+                    return AQI_CALCULATION(201, 300  ,150.5, 250.4, num)
+                elif 250.5<= num <=350.4:
                     return AQI_CALCULATION(301, 400, 250.5, 350.4, num)
-                elif 350.5<=num and num >=500.4:
+                elif 350.5<= num <=500.4:
                     return AQI_CALCULATION(401, 500, 350.5, 500.4, num)
 
 
             def CO(num):
-                if 0<=num and num>=4.4:
+                if 0<= num <=4.4:
                     return AQI_CALCULATION(0, 50, 0, 4.4, num)
-                elif 4.5<=num and num>=9.4:
+                elif 4.5<= num <=9.4:
                     return AQI_CALCULATION(51, 100, 4.5, 9.4, num)
-                elif 9.5<=num and num >=12.4:
+                elif 9.5<= num <=12.4:
                     return AQI_CALCULATION(101, 150, 9.5, 12.4, num)
-                elif 12.5<=num and num >=15.4:
+                elif 12.5<= num <=15.4:
                     return AQI_CALCULATION(151, 200, 12.5, 15.4, num)
-                elif 15.5<=num and num >=30.4:
+                elif 15.5<= num <=30.4:
                     return AQI_CALCULATION(201, 300, 15.5, 30.4, num)
-                elif 30.5<=num and num >=40.4:
+                elif 30.5<= num <=40.4:
                     return AQI_CALCULATION(301, 400, 30.5, 40.4, num)
-                elif 40.5<=num and num >=50.4:
+                elif 40.5<= num <=50.4:
                     return AQI_CALCULATION(401, 500, 40.5, 50.4, num)
 
 
             def SO2(num):
-                if 0 <= num and num >= 35:
+                if 0 <= num <= 35:
                     return AQI_CALCULATION(0, 50, 0, 35, num)
-                elif 36 <= num and num >= 75:
+                elif 36 <= num <= 75:
                     return AQI_CALCULATION(51, 100, 36, 75, num)
-                elif 76 <= num and num >= 185:
+                elif 76<= num <= 185:
                     return AQI_CALCULATION(101, 150, 76, 185, num)
-                elif 186 <= num and num >= 304:
+                elif 186 <= num <= 304:
                     return AQI_CALCULATION(151, 200, 186, 304, num)
-                elif 305 <= num and num >= 604:
+                elif 305 <= num <= 604:
                     return AQI_CALCULATION(201, 300, 305, 604, num)
-                elif 605 <= num and num >= 804:
+                elif 605 <= num <= 804:
                     return AQI_CALCULATION(301, 400, 605, 804, num)
-                elif 805 <= num and num >= 1004:
+                elif 805 <= num <= 1004:
                     return AQI_CALCULATION(401, 500, 805, 1004, num)
 
 
             def NO2(num):
-                if 0 <= num and num >= 53:
+                if 0 <= num <= 53:
                     return AQI_CALCULATION(0, 50, 0, 53, num)
-                elif 54 <= num and num >= 100:
+                elif 54 <= num <=100:
                     return AQI_CALCULATION(51, 100, 54, 100, num)
-                elif 101 <= num and num >= 360:
+                elif 101 <= num <= 360:
                     return AQI_CALCULATION(101, 150, 101, 300, num)
-                elif 361 <= num and num >= 649:
+                elif 361 <= num <= 649:
                     return AQI_CALCULATION(151, 200, 301, 649, num)
-                elif 650 <= num and num >= 1249:
+                elif 650 <= num <= 1249:
                     return AQI_CALCULATION(201, 300, 650, 1249, num)
-                elif 1250 <= num and num >= 1649:
+                elif 1250 <= num <= 1649:
                     return AQI_CALCULATION(301, 400, 1250, 1649, num)
-                elif 1650 <= num and num >= 2049:
+                elif 1650 <= num <= 2049:
                     return AQI_CALCULATION(401, 500, 1650, 2049, num)
 
             #"{:.2f}".format(0.1)
