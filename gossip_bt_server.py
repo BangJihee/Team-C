@@ -269,8 +269,6 @@ while True:
             print("PM25 : {}".format(PM25))
 
             msg = ""
-
-
             #AQI Conversion
 
             def AQI_CALCULATION(Imin, Imax, Cmin, Cmax, Input):
