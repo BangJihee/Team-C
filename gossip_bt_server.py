@@ -841,10 +841,10 @@ if __name__ == '__main__':
                 "minute": nowtime.minute,
                 "second": nowtime.second,
                 "temp": temp,
-                'SN1': SN1,  # NO2
-                'SN2': SN2,  # O3
-                'SN3': SN3,  # CO
-                'SN4': SN4,  # SO2
+                'SN1': SN1,
+                'SN2': SN2,
+                'SN3': SN3,
+                'SN4': SN4,
                 'PM25': PM25,
                 'A_SN1': AQI_NO2,
                 'A_SN2': AQI_O3,
