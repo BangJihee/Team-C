@@ -73,7 +73,7 @@ if __name__ == '__main__':
         CO_tempArray = [1.40, 1.03, 0.85, 0.62, 0.30, 0.03, -0.25, -0.48, -0.80]  ##
         #########################################################################
 
-        def get_n(temper, air):  # air = (NO2,O3, CO, SO2)
+        def get_alpha(temper, air):  # air = (NO2,O3, CO, SO2)
             temper
             i = 0  # index
             mulx = 0  # multiple #times
@@ -317,7 +317,7 @@ while True:
 
 
             #SN4 =((c8 - 300) - (get_n(t,'SO2')) * (c9 - 292)) / 0.300
-            SN4 = ((c8 - 300) - (get_n(t, 'SO2')) * (c9 - 292)) / 0.300
+            SN4 = ((c8 - 300) - (get_alpha(t, 'SO2')) * (c9 - 292)) / 0.300
             SN4 = SN4 if (SN4 >= 0) else -SN4
             print("SO2_SN4 : {}".format(SN4))
 
