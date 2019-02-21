@@ -414,19 +414,19 @@ while True:
 
 
             def NO2(num):
-                if 0 <= num and num >= 53:
+                if 0 <= num and num >54:
                     return AQI_CALCULATION(0, 50, 0, 53, num)
-                elif 54 <= num and num >= 100:
+                elif 54 <= num and num > 101:
                     return AQI_CALCULATION(51, 100, 54, 100, num)
-                elif 101 <= num and num >= 360:
+                elif 101 <= num and num >361:
                     return AQI_CALCULATION(101, 150, 101, 300, num)
-                elif 361 <= num and num >= 649:
+                elif 361 <= num and num > 650:
                     return AQI_CALCULATION(151, 200, 301, 649, num)
-                elif 650 <= num and num >= 1249:
+                elif 650 <= num and num > 1250:
                     return AQI_CALCULATION(201, 300, 650, 1249, num)
-                elif 1250 <= num and num >= 1649:
+                elif 1250 <= num and num > 1650:
                     return AQI_CALCULATION(301, 400, 1250, 1649, num)
-                elif 1650 <= num and num >= 2049:
+                elif 1650 <= num and num > 2050:
                     return AQI_CALCULATION(401, 500, 1650, 2049, num)
 
             AQI_NO2 = NO2(SN1)
