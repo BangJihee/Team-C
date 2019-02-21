@@ -1,4 +1,4 @@
-'''import argparse
+import argparse
 from neo import Gpio  # import Gpio library
 from time import sleep  # import sleep to wait for blinks
 
@@ -15,10 +15,10 @@ from time import sleep, time
 from neo import Gpio
 
 ############ Alpha sense data sheet ##############
-NO2_WE = 287; NO2_AE = 280; NO2_alpha = 0.212;  ##
-O3_WE = 394; O3_AE = 395; O3_alpha = 0.276;     ##
-CO_WE = 276; CO_AE = 280; CO_alpha = 0.266;     ##
-SO2_WE = 282; SO2_AE = 304; SO2_alpha = 0.296;  ##
+NO2_WE = 220; NO2_AE = 260; NO2_alpha = 0.207;
+O3_WE = 414; O3_AE = 400; O3_alpha = 0.256;
+CO_WE = 346; CO_AE = 274; CO_alpha = 0.276;
+SO2_WE = 300; SO2_AE = 394; SO2_alpha = 0.300;
 ##################################################
 
 def contol_mux( a, b, c, d):         # use binary bit to control mux
@@ -361,4 +361,3 @@ if __name__ == '__main__':
 
         # Sleep for 5 seconds
         sleep(5)
-'''
