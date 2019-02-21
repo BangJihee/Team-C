@@ -1,4 +1,4 @@
-from btserver import BTServer
+'''from btserver import BTServer
 from bterror import BTError
 from neo import Gpio
 import argparse
@@ -487,7 +487,6 @@ while True:
             print("")
             print("")
         sleep(2.5)
-
 '''
 from btserver import BTServer
 from bterror import BTError
@@ -865,4 +864,3 @@ if __name__ == '__main__':
 
         # Sleep for 5 seconds
         sleep(2.5)
-'''
