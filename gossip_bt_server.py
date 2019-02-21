@@ -736,7 +736,8 @@ if __name__ == '__main__':
     SN2=0
     SN3=0
     SN4=0
-    
+    PM25=0
+
     while True:
         for client_handler in server.active_client_handlers.copy():
 
