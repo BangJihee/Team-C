@@ -359,19 +359,19 @@ while True:
             #"{:.2f}".format(0.1)
 
             AQI_NO2 = NO2(SN1)
-            print("AQI_NO2:{:.2f} ".format(AQI_NO2))
+            print("AQI_NO2:{:.f} ".format(AQI_NO2))
 
             AQI_O3 = O3(SN2)
-            print("AQI_O3:{:.2f}".format(AQI_O3))
+            print("AQI_O3:{:.f}".format(AQI_O3))
 
             AQI_CO = CO(SN3)
-            print("AQI_CO:{:.2f}".format(AQI_CO))
+            print("AQI_CO:{:.f}".format(AQI_CO))
 
             AQI_SO2 = SO2(SN4)
-            print("AQI_SO2 : {:.2f}".format(AQI_SO2))
+            print("AQI_SO2 : {:.f}".format(AQI_SO2))
 
             AQI_PM25 = A_PM25(PM25)
-            print("AQI_PM25: {:.2f}".format(AQI_PM25))
+            print("AQI_PM25: {:.f}".format(AQI_PM25))
 
             #def default(o):
             #    if isinstance(o,(datetime.date, datetime.datetime)):
@@ -391,17 +391,17 @@ while True:
                           "hour": nowtime.hour,
                           "minute": nowtime.minute,
                           "second": nowtime.second,
-                          "temp": round(t,2),
+                          "temp": round(t),
                           'SN1': SN1, #NO2
                           'SN2': SN2, #O3
                           'SN3': SN3, #CO
                           'SN4': SN4, #SO2
-                          'PM25': round(PM25,2),
-                          'A_SN1': round(AQI_NO2,2),
-                          'A_SN2': round(AQI_O3,2),
-                          'A_SN3': round(AQI_CO,2),
-                          'A_SN4': round(AQI_SO2,2),
-                          'A_PM25': round(AQI_PM25,2)
+                          'PM25': round(PM25),
+                          'A_SN1': round(AQI_NO2),
+                          'A_SN2': round(AQI_O3),
+                          'A_SN3': round(AQI_CO),
+                          'A_SN4': round(AQI_SO2),
+                          'A_PM25': round(AQI_PM25)
 
                 }
                 msg = json.dumps(output)
