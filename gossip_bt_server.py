@@ -518,7 +518,6 @@ def contol_mux(a, b, c, d):  # use binary bit to control mux
     scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
     return raw, scale
 
-
 # ---------------------------N table -------------------------------------
 # array for calculate alph
 # temp              -30,  -20   -10     0    10     20   30    40    50
@@ -590,7 +589,6 @@ def get_n(temper, air):  # air = (NO2,O3, CO, SO2)
             N = SO2_tempArray[i] + (tmp * mulx)
 
     return N
-
 
 # --------------------------- AQI table ----------------------------------------
 # AQI              0-50,  51-100, 101-150, 151-200, 201-300, 301-400, 401-500
@@ -687,8 +685,6 @@ def AQI_convert(c, air):
 
     return I;
 
-
-##main start##
 if __name__ == '__main__':
     # Create option parser
     usage = "usage: %prog [options] arg"
@@ -730,13 +726,12 @@ if __name__ == '__main__':
     # Blink example
     for i in range(4):
         neo.pinMode(gpiopins[i], neo.OUTPUT)
-
-    temp=0
-    SN1=0
-    SN2=0
-    SN3=0
-    SN4=0
-    PM25=0
+    #temp=0
+    #SN1=0
+    #SN2=0
+    #SN3=0
+    #SN4=0
+    #PM25=0
 
     while True:
         for client_handler in server.active_client_handlers.copy():
