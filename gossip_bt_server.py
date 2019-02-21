@@ -498,7 +498,7 @@ import asyncore
 import json
 from datetime import datetime
 from threading import Thread
-from time import sleep, time
+from time import sleep,time
 from json import dumps
 import logging
 
@@ -513,7 +513,7 @@ def contol_mux( a, b, c, d):         # use binary bit to control mux
     neo.digitalWrite(gpiopins[0], d)
     neo.digitalWrite(gpiopins[1], c)
     neo.digitalWrite(gpiopins[2], b)
-    neo.digitalWrite(gpio[3], a)
+    neo.digitalWrite(gpiopins[3], a)
     raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
     scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
     return raw, scale
