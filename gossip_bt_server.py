@@ -317,7 +317,7 @@ while True:
 
 
             #SN4 =((c8 - 300) - (get_n(t,'SO2')) * (c9 - 292)) / 0.300
-            SN4 = ((c8 - 300) - ((get_n(t, 'SO2')) * (c9 - 292))) / 0.300
+            SN4 = ((c8 - 300) - (get_n(t, 'SO2')) * (c9 - 292)) / 0.300
             SN4 = SN4 if (SN4 >= 0) else -SN4
             print("SO2_SN4 : {}".format(SN4))
 
