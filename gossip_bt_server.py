@@ -483,16 +483,16 @@ if __name__ == '__main__':
                 'A_SN3': AQI_CO,
                 'A_SN4': AQI_SO2,
                 'A_PM25': AQI_PM25
-            }
+                }
 
                 msg = json.dumps(output)
             elif args.output_format == "csv":
                 msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {}, {}  ".format(datetime, t, SN1, SN2, SN3, SN4,AQI_PM25, AQI_NO2, AQI_O3, AQI_CO,AQI_SO2, AQI_PM25)
-        try:
-            client_handler.send((msg + '\n').encode('ascii'))
-        except Exception as e:
-            BTError.print_error(handler=client_handler, error=BTError.ERR_WRITE, error_message=repr(e))
-            client_handler.handle_close()
+            try:
+                client_handler.send((msg + '\n').encode('ascii'))
+            except Exception as e:
+                BTError.print_error(handler=client_handler, error=BTError.ERR_WRITE, error_message=repr(e))
+                client_handler.handle_close()
 
         # Sleep for 5 seconds
         sleep(2.5)
