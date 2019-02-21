@@ -841,7 +841,7 @@ if __name__ == '__main__':
                 "hour": nowtime.hour,
                 "minute": nowtime.minute,
                 "second": nowtime.second,
-                "temp": temp,
+               # "temp": temp,
                 'SN1': SN1,
                 'SN2': SN2,
                 'SN3': SN3,
@@ -856,7 +856,7 @@ if __name__ == '__main__':
             }
             msg = json.dumps(output)
         elif args.output_format == "csv":
-            msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(datetime, temp, SN1, SN2, SN3, SN4, AQI_PM25, AQI_NO2, AQI_O3, AQI_CO,AQI_SO2, AQI_PM25)
+            msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {}  ".format(datetime, SN1, SN2, SN3, SN4, AQI_PM25, AQI_NO2, AQI_O3, AQI_CO,AQI_SO2, AQI_PM25)
         try:
             client_handler.send((msg + '\n').encode('ascii'))
         except Exception as e:
