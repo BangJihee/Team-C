@@ -271,7 +271,7 @@ while True:
 
             def AQI_CALCULATION(Imin, Imax, Cmin, Cmax, Input):
                 Result = ((float(Imax) - float(Imin)) / (float(Cmax) - float(Cmin))) * (float(Input) - float(Cmin)) + float(Imin)
-                return float(Result)
+                return Result
 
             def O3(num):
                 if 0 <= num <= 54:
