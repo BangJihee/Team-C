@@ -354,19 +354,19 @@ while True:
                     return AQI_CALCULATION(401, 500, 1650, 2049, num)
 
             AQI_NO2 = NO2(SN1)
-            print("AQI_NO2:{} ".format(AQI_NO2))
+            print("AQI_NO2:{} ".format(int(AQI_NO2)))
 
             AQI_O3 = O3(SN2)
-            print("AQI_O3:{}".format(AQI_O3))
+            print("AQI_O3:{}".format(int(AQI_O3)))
 
             AQI_CO = CO(SN3)
-            print("AQI_CO:{}".format(AQI_CO))
+            print("AQI_CO:{}".format(int(AQI_CO)))
 
             AQI_SO2 = SO2(SN4)
-            print("AQI_SO2 : {}".format(AQI_SO2))
+            print("AQI_SO2 : {}".format(int(AQI_SO2)))
 
             AQI_PM25 = A_PM25(PM25)
-            print("AQI_PM25: {}".format(AQI_PM25))
+            print("AQI_PM25: {.2f}".format(AQI_PM25))
 
 
             #now = datetime.now()
@@ -375,17 +375,17 @@ while True:
             if args.output_format == "json":
                 output = {
                           'time': epoch_time,
-                          'temp': t, #real temperature
+                          'temp': round(t), #real temperature
                           'SN1': SN1, #NO2
                           'SN2': SN2, #O3
                           'SN3': SN3, #CO
                           'SN4': SN4, #SO2
                           'PM25': PM25,
-                          'A_SN1': AQI_NO2,
-                          'A_SN2': AQI_O3,
-                          'A_SN3': AQI_CO,
-                          'A_SN4': AQI_SO2,
-                          'A_PM25': AQI_PM25
+                          'A_SN1': round(AQI_NO2),
+                          'A_SN2': round(AQI_O3),
+                          'A_SN3': round(AQI_CO),
+                          'A_SN4': round(AQI_SO2),
+                          'A_PM25': round(AQI_PM25)
 
                 }
                 msg = json.dumps(output)
