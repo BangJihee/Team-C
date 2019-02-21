@@ -295,7 +295,7 @@ while True:
                 elif 55.5<= num <=150.4:
                     return AQI_CALCULATION(151, 200, 55.5, 150.4, num)
                 elif 150.5<= num <=250.4:
-                    return AQI_CALCULATION(201, 300  ,150.5, 250.4, num)
+                    return AQI_CALCULATION(201, 300 ,150.5, 250.4, num)
                 elif 250.5<= num <=350.4:
                     return AQI_CALCULATION(301, 400, 250.5, 350.4, num)
                 elif 350.5<= num <=500.4:
@@ -354,19 +354,19 @@ while True:
 
 
             AQI_NO2 = NO2(SN1)
-            print("AQI_NO2:{} ".format(int(AQI_NO2)))
+            #print("AQI_NO2:{} ".format(int(AQI_NO2)))
 
             AQI_O3 = O3(SN2)
-            print("AQI_O3:{}".format(int(AQI_O3)))
+            #print("AQI_O3:{}".format(int(AQI_O3)))
 
             AQI_CO = CO(SN3)
-            print("AQI_CO:{}".format(int(AQI_CO)))
+            #print("AQI_CO:{}".format(int(AQI_CO)))
 
             AQI_SO2 = SO2(SN4)
-            print("AQI_SO2 : {}".format(int(AQI_SO2)))
+            #print("AQI_SO2 : {}".format(int(AQI_SO2)))
 
             AQI_PM25 = A_PM25(PM25)
-            print("AQI_PM25: {}".format(int(AQI_PM25)))
+            #print("AQI_PM25: {}".format(int(AQI_PM25)))
 
             #def default(o):
             #    if isinstance(o,(datetime.date, datetime.datetime)):
