@@ -260,7 +260,7 @@ if __name__ == '__main__':
 
     while True:
         for client_handler in server.active_client_handlers.copy():
-            # c0 temperature
+            ''''# c0 temperature
             raw, scale = contol_mux(0, 0, 0, 0)
             sleep(1)
             v = raw * scale
@@ -352,8 +352,116 @@ if __name__ == '__main__':
             print("AQI_CO:{}".format(int(AQI_CO)))
             print("AQI_SO2 : {}".format(int(AQI_SO2)))
             print("AQI_PM25: {}".format(int(AQI_PM25)))
+        '''
+            # ==mux 0==##########
+            raw, scale = contol_mux(0, 0, 0, 0)
+            sleep(1)
+            v = raw * scale  # volt
+            temp_c = (v - 500) / 10 - 6
+            temp = (temp_c * 1.8) + 32
+            print("temp: {} F".format(temp))
 
-        epochtime = datetime.now()
+            # ==mux 2==########## NO2_WE
+            raw, scale = contol_mux(0, 0, 1, 0)
+            sleep(0.05)
+            c2 = raw * scale  # volt
+
+            # ==mux 3==########## NO2_AE
+            raw, scale = contol_mux(0, 0, 1, 1)
+            sleep(0.05)
+            c3 = raw * scale  # volt
+
+            # Alphasense SN1 >> NO2
+            SN1 = ((c2 - NO2_WE) - (get_n(temp_c, 'NO2') * (c3 - NO2_AE))) / NO2_alpha
+            SN1 = SN1 if (SN1 >= 0) else -SN1
+            raw_SN1 = SN1
+            print("NO2: {} ".format(SN1))
+            SN1 = AQI_convert(SN1, 'NO2')
+            print("NO2-AQIconvert: {} ".format(SN1))
+
+            # ==mux 4==########## O3_WE
+            raw, scale = contol_mux(0, 1, 0, 0)
+            sleep(0.05)
+            c4 = raw * scale  # volt
+
+            # ==mux 5==########## O3_AE
+            raw, scale = contol_mux(0, 1, 0, 1)
+            sleep(0.05)
+            c5 = raw * scale  # volt
+
+            # Alphasense SN2 >> O3
+            SN2 = ((c4 - O3_WE) - (get_n(temp_c, 'O3') * (c5 - O3_AE))) / O3_alpha
+            SN2 = SN2 if (SN2 >= 0) else -SN2
+            raw_SN2 = SN2
+            print("O3: {} ".format(SN2))
+            SN2 = AQI_convert(SN2, 'O3')
+            print("O3-AQIconverted: {} ".format(SN2))
+
+            # ==mux 6==########## CO_WE
+            raw, scale = contol_mux(0, 1, 1, 0)
+            sleep(0.05)
+            c6 = raw * scale  # volt
+
+            # ==mux 7==########## CO_AE
+            raw, scale = contol_mux(0, 1, 1, 1)
+            sleep(0.05)
+            c7 = raw * scale  # volt
+
+            # Alphasense SN3
+            SN3 = ((c6 - CO_WE) - (get_n(temp_c, 'CO') * (c7 - CO_AE))) / CO_alpha
+            SN3 = SN3 / 1000
+            SN3 = SN3 if (SN3 >= 0) else -SN3
+            raw_SN3 = SN3
+            print("CO: {} ".format(SN3))
+            SN3 = AQI_convert(SN3, 'CO')
+            print("CO-AQIconvert: {} ".format(SN3))
+
+            # ==mux 8==########## SO2_WE
+            raw, scale = contol_mux(1, 0, 0, 0)
+            sleep(0.05)
+            c8 = raw * scale  # volt
+
+            # ==mux 9==########## SO2_AE
+            raw, scale = contol_mux(1, 0, 0, 1)
+            sleep(0.05)
+            c9 = raw * scale  # volt
+
+            # Alphasense SN4
+            SN4 = ((c8 - SO2_WE) - (get_n(temp_c, 'SO2') * (c9 - SO2_AE))) / SO2_alpha
+            SN4 = SN4 if (SN4 >= 0) else -SN4
+            raw_SN4 = SN4
+            print("SO2: {} ".format(SN4))
+            SN4 = AQI_convert(SN4, 'SO2')
+            print("SO2-AQIconvert: {} ".format(SN4))
+
+            # ==mux 11==########## PM2.5
+            raw, scale = contol_mux(1, 0, 1, 1)
+            sleep(0.05)
+            c11 = (raw * scale) / 1000  # volt
+
+            # PM2.5
+            hppcf = (240.0 * pow(c11, 6) - 2491.3 * pow(c11, 5) + 9448.7 * pow(c11, 4) - 14840.0 * pow(c11,3) + 10684.0 * pow(c11, 2) + 2211.8 * c11 + 7.9623)
+            PM25 = 0.518 + .00274 * hppcf
+            raw_PM25 = PM25
+            print("PM25: {} ".format(PM25))
+            PM25 = AQI_convert(PM25, 'PM25')
+            print("PM25-AQIconvert: {} ".format(PM25))
+            # print("It's now: {:%Y/%m/%d %H:%M:%S}".format(epochtime))
+            print("\n")
+
+            AQI_NO2 = AQI_convert(SN1, 'NO2')
+            AQI_O3 = AQI_convert(SN2, 'O3')
+            AQI_CO = AQI_convert(SN3, 'CO')
+            AQI_SO2 = AQI_convert(SN4, 'SO2')
+            AQI_PM25=AQI_convert(PM25,'PM25')
+
+
+            print("AQI_NO2:{} ".format(int(AQI_NO2)))
+            print("AQI_O3:{}".format(int(AQI_O3)))
+            print("AQI_CO:{}".format(int(AQI_CO)))
+            print("AQI_SO2 : {}".format(int(AQI_SO2)))
+            print("AQI_PM25: {}".format(int(AQI_PM25)))
+
         nowtime = datetime.now()
 
         if args.output_format == "json":
