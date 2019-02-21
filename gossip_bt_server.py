@@ -276,11 +276,11 @@ while True:
             def O3(num):
                 if 0 <= num <= 54:
                     return AQI_CALCULATION(0, 50, 0, 54, num)
-                elif 55 <= num<= 70:
+                elif 55 <= num <= 70:
                     return AQI_CALCULATION(51, 100, 55, 70, num)
                 elif 71 <= num <= 85:
                     return AQI_CALCULATION(101, 150, 71, 85, num)
-                elif 86 <= num <=105:
+                elif 86 <= num <= 105:
                     return AQI_CALCULATION(151, 200, 86, 105, num)
                 elif 106 <= num <= 200:
                     return AQI_CALCULATION(201, 300, 106, 200, num)
@@ -393,7 +393,7 @@ while True:
                           'SN4': SN4, #SO2
                           'PM25': round(PM25),
                           'A_SN1': round(AQI_NO2),
-                          'A_SN2': round(AQI_O3),
+                          'A_SN2': AQI_O3,
                           'A_SN3': round(AQI_CO),
                           'A_SN4': round(AQI_SO2),
                           'A_PM25': round(AQI_PM25)
