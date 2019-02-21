@@ -174,7 +174,7 @@ while True:
             c5 = raw * scale
 
 
-            SN2 = ((c4 -408 ) - ((0.18) * (c5 - 403))) / 0.256
+            SN2 = ((c4 -408) - ((0.18) * (c5 - 403))) / 0.256
             SN2 = SN2 if (SN2 >= 0) else -SN2
             print("O3 _SN2 : {}".format(SN2))
 
@@ -208,7 +208,7 @@ while True:
             c7 = (raw * scale)/1000
 
 
-            SN3 =float(((c6 - 298) - ((0.03) * (c7 - 279))) / 0.276)
+            SN3 =((c6 - 298) - ((0.03) * (c7 - 279))) / 0.276
             SN3 = SN3 if (SN3 >= 0) else -SN3
             print("CO_SN3 : {}".format(SN3))
 
