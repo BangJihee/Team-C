@@ -105,7 +105,7 @@ while True:
             c0 = raw * scale
             t = (c0 - 500) / 10 - 6
             # Celsius to Fehrenheit formula
-           # t = t * 1.8 + 32
+            t = t * 1.8 + 32
 
             print("Temp: {} F".format(t))
 
