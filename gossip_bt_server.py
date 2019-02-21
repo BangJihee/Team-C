@@ -407,7 +407,7 @@ while True:
                 msg = json.dumps(output)
 
             elif args.output_format == "csv":
-                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(epoch_time, t, SN1, SN2, SN3, SN4 ,PM25,AQI_NO2,AQI_O3,AQI_CO,AQI_SO2, AQI_PM25)
+                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {:.2f} ,{:.2f}, {:.2f}, {:.2f} , {:.2f} ".format(epoch_time, t, SN1, SN2, SN3, SN4 ,PM25, AQI_NO2, AQI_O3, AQI_CO, AQI_SO2, AQI_PM25)
             try:
                 client_handler.send((msg + '\n').encode('ascii'))
             except Exception as e:
