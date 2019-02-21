@@ -503,20 +503,10 @@ from json import dumps
 import logging
 
 # ------------ Alpha sense data sheet -------------
-NO2_WE = 220;
-NO2_AE = 260;
-NO2_alpha = 0.207;
-O3_WE = 414;
-O3_AE = 400;
-O3_alpha = 0.256;
-CO_WE = 346;
-CO_AE = 274;
-CO_alpha = 0.276;
-SO2_WE = 300;
-SO2_AE = 394;
-SO2_alpha = 0.300;
-
-
+NO2_WE = 220; NO2_AE = 260; NO2_alpha = 0.207;
+O3_WE = 414; O3_AE = 400; O3_alpha = 0.256;
+CO_WE = 346; CO_AE = 274; CO_alpha = 0.276;
+SO2_WE = 300; SO2_AE = 394; SO2_alpha = 0.300;
 # ------------------------------------------------
 
 def contol_mux(a, b, c, d):  # use binary bit to control mux
@@ -622,8 +612,6 @@ CO_MinAqiArray = [0.0, 4.5, 9.5, 12.5, 15.5, 30.5, 40.5]
 SO2_MinAqiArray = [0.0, 36.0, 76.0, 186.0, 305.0, 605.0, 805.0]
 NO2_MinAqiArray = [0.0, 54.0, 101.0, 361.0, 650.0, 1250.0, 1650.0]
 Aqi_MinAqiArray = [0.0, 51.0, 101.0, 151.0, 201.0, 301.0, 401.0]
-
-
 # -------------------------------------------------------------------------------
 
 
@@ -753,9 +741,9 @@ if __name__ == '__main__':
             raw, scale = contol_mux(0, 0, 0, 0)
             sleep(1)
             v = raw * scale
-            t = (v - 500) / 10 - 6
-            t = (t * 1.8) + 32
-            print("temp: {} F".format(t))
+            temp = (v - 500) / 10 - 6
+            temp = (temp * 1.8) + 32
+            print("temp: {} F".format(temp))
 
             # C2 NO2_we
             raw, scale = contol_mux(0, 0, 1, 0)
@@ -768,7 +756,7 @@ if __name__ == '__main__':
             c3 = raw * scale
 
             # SN1 NO2
-            SN1 = ((c2 - NO2_WE) - (get_n(t, 'NO2') * (c3 - NO2_AE))) / NO2_alpha
+            SN1 = ((c2 - NO2_WE) - (get_n(temp, 'NO2') * (c3 - NO2_AE))) / NO2_alpha
             SN1 = SN1 if (SN1 >= 0) else -SN1
             print("NO2 _SN1 : {}".format(SN1))
 
@@ -783,7 +771,7 @@ if __name__ == '__main__':
             c5 = raw * scale
 
             # SN2 O3
-            SN2 = ((c4 - O3_WE) - (get_n(t, 'O3') * (c5 - O3_AE))) / O3_alpha
+            SN2 = ((c4 - O3_WE) - (get_n(temp, 'O3') * (c5 - O3_AE))) / O3_alpha
             SN2 = SN2 if (SN2 >= 0) else -SN2
             print("O3 _SN2 : {}".format(SN2))
 
@@ -798,7 +786,7 @@ if __name__ == '__main__':
             c7 = raw * scale
 
             # SN3 CO
-            SN3 = ((c6 - CO_WE) - (get_n(t, 'CO') * (c7 - CO_AE))) / CO_alpha
+            SN3 = ((c6 - CO_WE) - (get_n(temp, 'CO') * (c7 - CO_AE))) / CO_alpha
             SN3 = SN3 / 1000
             SN3 = SN3 if (SN3 >= 0) else -SN3
             print("CO_SN3 : {}".format(SN3))
@@ -814,7 +802,7 @@ if __name__ == '__main__':
             c9 = raw * scale
 
             # SN4 SO2
-            SN4 = ((c8 - SO2_WE) - (get_n(t, 'SO2') * (c9 - SO2_AE))) / SO2_alpha
+            SN4 = ((c8 - SO2_WE) - (get_n(temp, 'SO2') * (c9 - SO2_AE))) / SO2_alpha
             SN4 = SN4 if (SN4 >= 0) else -SN4
             print("SO2_SN4 : {}".format(SN4))
 
@@ -825,9 +813,7 @@ if __name__ == '__main__':
 
             # PM2.5 equation
 
-            hppcf = (240.0 * pow(c11, 6) - 2491.3 * pow(c11, 5) + 9448.7 * pow(c11, 4) - 14840.0 * pow(c11,
-                                                                                                       3) + 10684.0 * pow(
-                c11, 2) + 2211.8 * c11 + 7.9623)
+            hppcf = (240.0 * pow(c11, 6) - 2491.3 * pow(c11, 5) + 9448.7 * pow(c11, 4) - 14840.0 * pow(c11,3) + 10684.0 * pow(c11, 2) + 2211.8 * c11 + 7.9623)
             PM25 = 0.518 + .00274 * hppcf
             PM25 = PM25
             AQI_PM25 = AQI_convert(PM25, 'PM25')
@@ -855,7 +841,7 @@ if __name__ == '__main__':
                 "hour": nowtime.hour,
                 "minute": nowtime.minute,
                 "second": nowtime.second,
-                "temp": t,
+                "temp": temp,
                 'SN1': SN1,  # NO2
                 'SN2': SN2,  # O3
                 'SN3': SN3,  # CO
@@ -870,7 +856,7 @@ if __name__ == '__main__':
             }
             msg = json.dumps(output)
         elif args.output_format == "csv":
-            msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(datetime, t, SN1, SN2, SN3, SN4,AQI_PM25, AQI_NO2, AQI_O3, AQI_CO,AQI_SO2, AQI_PM25)
+            msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {} , {} ".format(datetime, temp, SN1, SN2, SN3, SN4,AQI_PM25, AQI_NO2, AQI_O3, AQI_CO,AQI_SO2, AQI_PM25)
         try:
             client_handler.send((msg + '\n').encode('ascii'))
         except Exception as e:
