@@ -277,7 +277,7 @@ if __name__ == '__main__':
             print("")
             print(c4)
             print(c5)
-            
+
             # SN2 O3
             SN2 = ((c4 - O3_WE) - (get_n(t, 'O3') * (c5 - O3_AE))) / O3_alpha
             SN2 = SN2 if (SN2 >= 0) else -SN2
@@ -293,6 +293,10 @@ if __name__ == '__main__':
             raw, scale = contol_mux(0, 1, 1, 1)
             sleep(0.05)
             c7 = raw * scale
+
+            print("")
+            print(c6)
+            print(c7)
 
             # SN3 CO
             SN3 = ((c6 - CO_WE) - (get_n(t, 'CO') * (c7 - CO_AE))) / CO_alpha
@@ -311,6 +315,10 @@ if __name__ == '__main__':
             sleep(0.05)
             c9 = raw * scale
 
+            print("")
+            print(c8)
+            print(c9)
+            
             #  SN4 SO2
             SN4 = ((c8 - SO2_WE) - (get_n(t, 'SO2') * (c9 - SO2_AE))) / SO2_alpha
             SN4 = SN4 if (SN4 >= 0) else -SN4
