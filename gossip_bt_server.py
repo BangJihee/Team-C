@@ -11,6 +11,7 @@ import sqlite3
 from json import dumps
 from datetime import datetime
 import datetime
+import decimal
 
 
 logger= logging.getLogger(__name__)
@@ -355,20 +356,22 @@ while True:
                 elif 1650 <= num and num >= 2049:
                     return AQI_CALCULATION(401, 500, 1650, 2049, num)
 
+            #"{:.2f}".format(0.1)
+
             AQI_NO2 = NO2(SN1)
-            print("AQI_NO2:{} ".format(AQI_NO2))
+            print("AQI_NO2:{:.2f} ".format(AQI_NO2))
 
             AQI_O3 = O3(SN2)
-            print("AQI_O3:{}".format(AQI_O3))
+            print("AQI_O3:{:.2f}".format(AQI_O3))
 
             AQI_CO = CO(SN3)
-            print("AQI_CO:{}".format(AQI_CO))
+            print("AQI_CO:{:.2f}".format(AQI_CO))
 
             AQI_SO2 = SO2(SN4)
-            print("AQI_SO2 : {}".format(AQI_SO2))
+            print("AQI_SO2 : {:.2f}".format(AQI_SO2))
 
             AQI_PM25 = A_PM25(PM25)
-            print("AQI_PM25: {}".format(AQI_PM25))
+            print("AQI_PM25: {:.2f}".format(AQI_PM25))
 
             #def default(o):
             #    if isinstance(o,(datetime.date, datetime.datetime)):
