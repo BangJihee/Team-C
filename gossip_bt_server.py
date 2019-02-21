@@ -143,8 +143,6 @@ while True:
             scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
             c3 = raw * scale
 
-            print(c2)
-            print(c3)
 
             SN1 = ((c2 - 220) - ((1.18) * (c3 - 260))) / 0.207
             SN1 = SN1 if (SN1 >= 0) else -SN1
@@ -178,7 +176,7 @@ while True:
             c5 = raw * scale
 
 
-            SN2 = ((c4 -408 ) - ((0.18) * (c5 - 403))) / 0.256
+            SN2 = ((c4 -414 ) - ((0.18) * (c5 - 400))) / 0.256
             SN2 = SN2 if (SN2 >= 0) else -SN2
             print("O3 _SN2 : {}".format(SN2))
 
@@ -212,7 +210,7 @@ while True:
             c7 = raw * scale
 
 
-            SN3 =(((c6 - 298) - ((0.03) * (c7 - 279))) / 0.276)/1000
+            SN3 =(((c6 - 346) - ((0.03) * (c7 - 274))) / 0.276)/1000
             SN3 = SN3 if (SN3 >= 0) else -SN3
             print("CO_SN3 : {}".format(SN3))
 
