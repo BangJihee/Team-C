@@ -13,6 +13,7 @@ from datetime import datetime
 import datetime
 #import decimal
 
+
 logger= logging.getLogger(__name__)
 #Allows the application log to integrate its own messages with messages from third module
 if __name__ == '__main__':
@@ -45,10 +46,7 @@ if __name__ == '__main__':
     pinnum = [0, 0, 0, 0]
     #sensor_type=['Temp','NO2','O3','CO','SO2','PM25']
 
-    # Using A0 pin
-    #raw = int(open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw").read())
-    #scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
-
+   
     #Set GPIO pins to output
     try:
         for pin in gpiopins:
