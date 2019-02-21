@@ -488,7 +488,6 @@ while True:
             print("")
         sleep(2.5)
 '''
-
 from btserver import BTServer
 from bterror import BTError
 from neo import Gpio
@@ -737,6 +736,7 @@ if __name__ == '__main__':
         for client_handler in server.active_client_handlers.copy():
 
             # c0 temperature
+            temp=''
             raw, scale = contol_mux(0, 0, 0, 0)
             sleep(1)
             v = raw * scale
