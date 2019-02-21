@@ -11,20 +11,10 @@ from json import dumps
 import logging
 
 # ------------ Alpha sense data sheet -------------
-NO2_WE = 220;
-NO2_AE = 260;
-NO2_alpha = 0.207;
-O3_WE = 414;
-O3_AE = 400;
-O3_alpha = 0.256;
-CO_WE = 346;
-CO_AE = 274;
-CO_alpha = 0.276;
-SO2_WE = 300;
-SO2_AE = 394;
-SO2_alpha = 0.300;
-
-
+NO2_WE = 220; NO2_AE = 260; NO2_alpha = 0.207;
+O3_WE = 414; O3_AE = 400; O3_alpha = 0.256;
+CO_WE = 346; CO_AE = 274; CO_alpha = 0.276;
+SO2_WE = 300; SO2_AE = 394; SO2_alpha = 0.300;
 # ------------------------------------------------
 
 def contol_mux(a, b, c, d):  # use binary bit to control mux
@@ -45,8 +35,6 @@ NO2_tempArray = [1.18, 1.18, 1.18, 1.18, 1.18, 1.18, 1.18, 2.00, 2.70]  # SN1
 O3_tempArray = [0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 2.87]  # SN2
 CO_tempArray = [1.40, 1.03, 0.85, 0.62, 0.30, 0.03, -0.25, -0.48, -0.80]  # SN3
 SO2_tempArray = [0.85, 0.85, 0.85, 0.85, 0.85, 1.15, 1.45, 1.75, 1.95]  # SN4
-
-
 # ------------------------------------------------------------------------
 
 def get_n(temper, air):  # air = (NO2,O3, CO, SO2)
@@ -130,8 +118,6 @@ CO_MinAqiArray = [0.0, 4.5, 9.5, 12.5, 15.5, 30.5, 40.5]
 SO2_MinAqiArray = [0.0, 36.0, 76.0, 186.0, 305.0, 605.0, 805.0]
 NO2_MinAqiArray = [0.0, 54.0, 101.0, 361.0, 650.0, 1250.0, 1650.0]
 Aqi_MinAqiArray = [0.0, 51.0, 101.0, 151.0, 201.0, 301.0, 401.0]
-
-
 # -------------------------------------------------------------------------------
 
 
@@ -232,10 +218,6 @@ if __name__ == '__main__':
 
     neo = Gpio()
 
-    # S0 = 24 # pin to use
-    # S1 = 25
-    # S2 = 26
-    # S3 = 27
     gpiopins = [24, 25, 26, 27]
     gpio = Gpio()
 
@@ -251,108 +233,93 @@ if __name__ == '__main__':
     # Blink example
     for i in range(4):
         neo.pinMode(gpiopins[i], neo.OUTPUT)
-    t=0
-    SN1=0
-    SN2=0
-    SN3=0
-    SN4=0
-    PM25=0
 
     while True:
         for client_handler in server.active_client_handlers.copy():
 
-            # ==mux 0==##########
+            # C0
             raw, scale = contol_mux(0, 0, 0, 0)
             sleep(1)
-            v = raw * scale  # volt
-            temp_c = (v - 500) / 10 - 6
-            temp = (temp_c * 1.8) + 32
-            print("temp: {} F".format(temp))
+            v = raw * scale
+            t= (v - 500) / 10 - 6
+            t = (t * 1.8) + 32
+            print("Temp: {} F ".format(t))
 
-            # ==mux 2==########## NO2_WE
+            # C1 NO2_WE
             raw, scale = contol_mux(0, 0, 1, 0)
             sleep(0.05)
-            c2 = raw * scale  # volt
+            c2 = raw * scale
 
-            # ==mux 3==########## NO2_AE
+            # C2 NO2_AE
             raw, scale = contol_mux(0, 0, 1, 1)
             sleep(0.05)
-            c3 = raw * scale  # volt
+            c3 = raw * scale
 
-            # Alphasense SN1 >> NO2
-            SN1 = ((c2 - NO2_WE) - (get_n(temp_c, 'NO2') * (c3 - NO2_AE))) / NO2_alpha
+            # SN1 NO2
+            SN1 = ((c2 - NO2_WE) - (get_n(t, 'NO2') * (c3 - NO2_AE))) / NO2_alpha
             SN1 = SN1 if (SN1 >= 0) else -SN1
-            raw_SN1 = SN1
             print("NO2: {} ".format(SN1))
-            SN1 = AQI_convert(SN1, 'NO2')
-            
 
-            # ==mux 4==########## O3_WE
+
+            # C4 O3_WE
             raw, scale = contol_mux(0, 1, 0, 0)
             sleep(0.05)
-            c4 = raw * scale  # volt
+            c4 = raw * scale
 
-            # ==mux 5==########## O3_AE
+            #C5 O3_AE
             raw, scale = contol_mux(0, 1, 0, 1)
             sleep(0.05)
-            c5 = raw * scale  # volt
+            c5 = raw * scale
 
-            # Alphasense SN2 >> O3
-            SN2 = ((c4 - O3_WE) - (get_n(temp_c, 'O3') * (c5 - O3_AE))) / O3_alpha
+            # SN2 O3
+            SN2 = ((c4 - O3_WE) - (get_n(t, 'O3') * (c5 - O3_AE))) / O3_alpha
             SN2 = SN2 if (SN2 >= 0) else -SN2
-            raw_SN2 = SN2
             print("O3: {} ".format(SN2))
-            SN2 = AQI_convert(SN2, 'O3')
 
 
-            # ==mux 6==########## CO_WE
+            # C6 CO_WE
             raw, scale = contol_mux(0, 1, 1, 0)
             sleep(0.05)
-            c6 = raw * scale  # volt
+            c6 = raw * scale
 
-            # ==mux 7==########## CO_AE
+            #C7 CO_AE
             raw, scale = contol_mux(0, 1, 1, 1)
             sleep(0.05)
-            c7 = raw * scale  # volt
+            c7 = raw * scale
 
-            # Alphasense SN3
-            SN3 = ((c6 - CO_WE) - (get_n(temp_c, 'CO') * (c7 - CO_AE))) / CO_alpha
+            # SN3 CO
+            SN3 = ((c6 - CO_WE) - (get_n(t, 'CO') * (c7 - CO_AE))) / CO_alpha
             SN3 = SN3 / 1000
             SN3 = SN3 if (SN3 >= 0) else -SN3
-            raw_SN3 = SN3
             print("CO: {} ".format(SN3))
-            SN3 = AQI_convert(SN3, 'CO')
 
 
-            # ==mux 8==########## SO2_WE
+            #C8 SO2_WE
             raw, scale = contol_mux(1, 0, 0, 0)
             sleep(0.05)
-            c8 = raw * scale  # volt
+            c8 = raw * scale
 
-            # ==mux 9==########## SO2_AE
+            # C9 SO2_AE
             raw, scale = contol_mux(1, 0, 0, 1)
             sleep(0.05)
-            c9 = raw * scale  # volt
+            c9 = raw * scale
 
-            # Alphasense SN4
-            SN4 = ((c8 - SO2_WE) - (get_n(temp_c, 'SO2') * (c9 - SO2_AE))) / SO2_alpha
+            #  SN4 SO2
+            SN4 = ((c8 - SO2_WE) - (get_n(t, 'SO2') * (c9 - SO2_AE))) / SO2_alpha
             SN4 = SN4 if (SN4 >= 0) else -SN4
-            raw_SN4 = SN4
             print("SO2: {} ".format(SN4))
-            SN4 = AQI_convert(SN4, 'SO2')
 
 
-            # ==mux 11==########## PM2.5
+            # C11 PM2.5
             raw, scale = contol_mux(1, 0, 1, 1)
             sleep(0.05)
-            c11 = (raw * scale) / 1000  # volt
+            c11 = (raw * scale) / 1000
 
             # PM2.5
             hppcf = (240.0 * pow(c11, 6) - 2491.3 * pow(c11, 5) + 9448.7 * pow(c11, 4) - 14840.0 * pow(c11,3) + 10684.0 * pow(c11, 2) + 2211.8 * c11 + 7.9623)
             PM25 = 0.518 + .00274 * hppcf
-            raw_PM25 = PM25
+
             print("PM25: {} ".format(PM25))
-            PM25 = AQI_convert(PM25, 'PM25')
 
             # print("It's now: {:%Y/%m/%d %H:%M:%S}".format(epochtime))
             print("\n")
@@ -362,7 +329,6 @@ if __name__ == '__main__':
             AQI_CO = AQI_convert(SN3, 'CO')
             AQI_SO2 = AQI_convert(SN4, 'SO2')
             AQI_PM25=AQI_convert(PM25,'PM25')
-
 
             print("AQI_NO2:{} ".format(int(AQI_NO2)))
             print("AQI_O3:{}".format(int(AQI_O3)))
