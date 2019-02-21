@@ -99,7 +99,6 @@ def get_n(temper, air):  # air = (NO2,O3, CO, SO2)
 
     return N
 
-
 # --------------------------- AQI table ----------------------------------------
 # AQI              0-50,  51-100, 101-150, 151-200, 201-300, 301-400, 401-500
 # index               0,       1,       2,       3,       4,       5,       6,
@@ -258,7 +257,7 @@ if __name__ == '__main__':
             print(c2)
             print(c3)
             print("")
-            
+
             # SN1 NO2
             SN1 = ((c2 - NO2_WE) - (get_n(t, 'NO2') * (c3 - NO2_AE))) / NO2_alpha
             SN1 = SN1 if (SN1 >= 0) else -SN1
@@ -275,6 +274,10 @@ if __name__ == '__main__':
             sleep(0.05)
             c5 = raw * scale
 
+            print("")
+            print(c4)
+            print(c5)
+            
             # SN2 O3
             SN2 = ((c4 - O3_WE) - (get_n(t, 'O3') * (c5 - O3_AE))) / O3_alpha
             SN2 = SN2 if (SN2 >= 0) else -SN2
