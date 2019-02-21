@@ -840,7 +840,7 @@ if __name__ == '__main__':
                 "hour": nowtime.hour,
                 "minute": nowtime.minute,
                 "second": nowtime.second,
-               # "temp": temp,
+                "temp": temp,
                 'SN1': SN1,
                 'SN2': SN2,
                 'SN3': SN3,
