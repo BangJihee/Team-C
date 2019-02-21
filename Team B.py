@@ -1,4 +1,4 @@
-import argparse
+'''import argparse
 from neo import Gpio  # import Gpio library
 from time import sleep  # import sleep to wait for blinks
 
@@ -361,3 +361,4 @@ if __name__ == '__main__':
 
         # Sleep for 5 seconds
         sleep(5)
+'''
