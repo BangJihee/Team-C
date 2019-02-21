@@ -462,10 +462,10 @@ if __name__ == '__main__':
             print("AQI_SO2 : {}".format(int(AQI_SO2)))
             print("AQI_PM25: {}".format(int(AQI_PM25)))
 
-        nowtime = datetime.now()
+            nowtime = datetime.now()
 
-        if args.output_format == "json":
-            output = {
+            if args.output_format == "json":
+                output = {
                 "year": nowtime.year,
                 "month": nowtime.month,
                 "day": nowtime.day,
@@ -473,21 +473,21 @@ if __name__ == '__main__':
                 "minute": nowtime.minute,
                 "second": nowtime.second,
                 'temp': t,  # real temperature
-                "SN1": SN1,  # NO2
-                "SN2": SN2,  # O3
-                "SN3": SN3,  # CO
-                "SN4": SN4,  # SO2
-                "PM25": PM25,
-                "A_SN1": AQI_NO2,
-                "A_SN2": AQI_O3,
-                "A_SN3": AQI_CO,
-                "A_SN4": AQI_SO2,
-                "A_PM25": AQI_PM25
+                'SN1': SN1,  # NO2
+                'SN2': SN2,  # O3
+                'SN3': SN3,  # CO
+                'SN4': SN4,  # SO2
+                'PM25': PM25,
+                'A_SN1': AQI_NO2,
+                'A_SN2': AQI_O3,
+                'A_SN3': AQI_CO,
+                'A_SN4': AQI_SO2,
+                'A_PM25': AQI_PM25
             }
 
-            msg = json.dumps(output)
-        elif args.output_format == "csv":
-            msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {}, {}  ".format(datetime, t, SN1, SN2, SN3, SN4,AQI_PM25, AQI_NO2, AQI_O3, AQI_CO,AQI_SO2, AQI_PM25)
+                msg = json.dumps(output)
+            elif args.output_format == "csv":
+                msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {}, {}  ".format(datetime, t, SN1, SN2, SN3, SN4,AQI_PM25, AQI_NO2, AQI_O3, AQI_CO,AQI_SO2, AQI_PM25)
         try:
             client_handler.send((msg + '\n').encode('ascii'))
         except Exception as e:
