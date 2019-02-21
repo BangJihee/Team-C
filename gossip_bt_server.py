@@ -251,7 +251,7 @@ if __name__ == '__main__':
     # Blink example
     for i in range(4):
         neo.pinMode(gpiopins[i], neo.OUTPUT)
-    temp=0
+    t=0
     SN1=0
     SN2=0
     SN3=0
