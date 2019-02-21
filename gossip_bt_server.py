@@ -730,19 +730,19 @@ while True:
 
 
             AQI_NO2 = NO2(SN1)
-            print("AQI_NO2:{} ".format(int(AQI_NO2)))
+            print("AQI_NO2:{} ".format(AQI_NO2))
 
             AQI_O3 = O3(SN2)
-            print("AQI_O3:{}".format(int(AQI_O3)))
+            print("AQI_O3:{}".format(AQI_O3))
 
             AQI_CO = CO(SN3)
-            print("AQI_CO:{}".format(int(AQI_CO)))
+            print("AQI_CO:{}".format(AQI_CO))
 
             AQI_SO2 = SO2(SN4)
-            print("AQI_SO2 : {}".format(int(AQI_SO2)))
+            print("AQI_SO2 : {}".format(AQI_SO2))
 
             AQI_PM25 = A_PM25(PM25)
-            print("AQI_PM25: {}".format(int(AQI_PM25)))
+            print("AQI_PM25: {}".format(AQI_PM25))
 
             #def default(o):
             #    if isinstance(o,(datetime.date, datetime.datetime)):
@@ -762,7 +762,7 @@ while True:
                           "hour": nowtime.hour,
                           "minute": nowtime.minute,
                           "second": nowtime.second,
-                          "temp": round(t),
+                          "temp": t,
                           'SN1': SN1, #NO2
                           'SN2': SN2, #O3
                           'SN3': SN3, #CO
