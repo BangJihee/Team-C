@@ -272,12 +272,12 @@ if __name__ == '__main__':
             # C4= O3_WE
             raw, scale = contol_mux(0, 1, 0, 0)
             sleep(0.05)
-            c4 = raw * scale
+            c4 = (raw * scale)/10
 
             #C5= O3_AE
             raw, scale = contol_mux(0, 1, 0, 1)
             sleep(0.05)
-            c5 = raw * scale
+            c5 = (raw * scale)/10
 
             print("------------------------------------------")
             print("c4 c5")
@@ -293,12 +293,12 @@ if __name__ == '__main__':
             # C6= CO_WE
             raw, scale = contol_mux(0, 1, 1, 0)
             sleep(0.05)
-            c6 = raw * scale
+            c6 = (raw * scale)/10
 
             #C7= CO_AE
             raw, scale = contol_mux(0, 1, 1, 1)
             sleep(0.05)
-            c7 = raw * scale
+            c7 = (raw * scale)/10
             print("------------------------------------------")
             print("c6 c7")
             print(c6)
@@ -314,12 +314,12 @@ if __name__ == '__main__':
             #C8 =SO2_WE
             raw, scale = contol_mux(1, 0, 0, 0)
             sleep(0.05)
-            c8 = raw * scale
+            c8 = (raw * scale)/10
 
             # C9= SO2_AE
             raw, scale = contol_mux(1, 0, 0, 1)
             sleep(0.05)
-            c9 = raw * scale
+            c9 = (raw * scale)/10
 
             print("------------------------------------------")
             print("c8 c9")
