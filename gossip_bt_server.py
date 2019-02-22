@@ -248,14 +248,14 @@ if __name__ == '__main__':
             # C1= NO2_WE
             raw, scale = contol_mux(0, 0, 1, 0)
             sleep(0.05)
-            c2 = raw * scale
+            c2 = (raw * scale)/10
 
 
 
             # C2 =NO2_AE
             raw, scale = contol_mux(0, 0, 1, 1)
             sleep(0.05)
-            c3 = raw * scale
+            c3 = (raw * scale)/10
 
             print("------------------------------------------")
             print("c2 c3")
