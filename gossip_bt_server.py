@@ -279,7 +279,6 @@ if __name__ == '__main__':
             print(c5)
             print("----------------------")
 
-
             # SN2 =O3
             print("o3_n=",get_n(t, 'O3'))
             SN2 = ((c4 - O3_WE) - (get_n(t, 'O3') * (c5 - O3_AE))) / O3_alpha
