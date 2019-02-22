@@ -366,6 +366,8 @@ if __name__ == '__main__':
                 'A_PM25': AQI_PM25
                 }
 
+
+
                 msg = json.dumps(output)
             elif args.output_format == "csv":
                 msg = "Time:{}, {}, {}, {}, {}, {}, {}, {} ,{}, {}, {}, {}  ".format(datetime, t, SN1, SN2, SN3, SN4,AQI_PM25, AQI_NO2, AQI_O3, AQI_CO,AQI_SO2, AQI_PM25)
