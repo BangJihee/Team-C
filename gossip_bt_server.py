@@ -357,11 +357,11 @@ if __name__ == '__main__':
                 'SN3': SN3,  # CO
                 'SN4': SN4,  # SO2
                 'PM25': PM25,
-                'A_SN1': int(AQI_NO2),
-                'A_SN2': int(AQI_O3),
-                'A_SN3': round(AQI_CO),
-                'A_SN4': round(AQI_SO2),
-                'A_PM25': round(AQI_PM25)
+                'A_SN1': int(AQI_NO2), #NO2
+                'A_SN2': int(AQI_O3), #O3
+                'A_SN3': int(AQI_CO), #CO
+                'A_SN4': int(AQI_SO2), #SO2
+                'A_PM25': int(AQI_PM25)
                 }
 
                 msg = json.dumps(output)
