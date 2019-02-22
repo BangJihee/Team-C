@@ -341,7 +341,8 @@ if __name__ == '__main__':
 
             nowtime = datetime.now()
             print(nowtime)
-
+            print("---------------------------------------")
+            print("")
 
             if args.output_format == "json":
                 output = {
