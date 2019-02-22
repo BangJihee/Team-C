@@ -26,7 +26,6 @@ def contol_mux(a, b, c, d):  # use binary bit to control mux
     scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
     return raw, scale
 
-
 # ---------------------------N table -------------------------------------
 # array for calculate alph
 # temp              -30,  -20   -10     0    10     20   30    40    50
@@ -251,11 +250,18 @@ if __name__ == '__main__':
             sleep(0.05)
             c2 = raw * scale
 
+            
 
             # C2 =NO2_AE
             raw, scale = contol_mux(0, 0, 1, 1)
             sleep(0.05)
             c3 = raw * scale
+
+            print("------------------------------------------")
+            print("c2 c3")
+            print(c2)
+            print(c3)
+            print("------------------------------------------")
 
             # SN1= NO2
             SN1 = ((c2 - NO2_WE) - (get_n(t, 'NO2') * (c3 - NO2_AE))) / NO2_alpha
@@ -338,7 +344,7 @@ if __name__ == '__main__':
             print("AQI_CO:{}".format(int(AQI_CO)))
             print("AQI_SO2 : {}".format(int(AQI_SO2)))
             print("AQI_PM25: {}".format(int(AQI_PM25)))
-            
+
             nowtime = datetime.now()
             print(nowtime)
 
