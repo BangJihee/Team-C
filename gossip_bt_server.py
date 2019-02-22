@@ -14,7 +14,7 @@ import logging
 NO2_WE = 220; NO2_AE = 260; NO2_alpha = 0.207;
 O3_WE = 414; O3_AE = 400; O3_alpha = 0.256;
 CO_WE = 346; CO_AE = 274; CO_alpha = 0.276;
-SO2_WE = 300; SO2_AE = 394; SO2_alpha = 0.300;
+SO2_WE = 300; SO2_AE = 294; SO2_alpha = 0.300;
 # ------------------------------------------------
 
 def contol_mux(a, b, c, d):  # use binary bit to control mux
@@ -32,18 +32,17 @@ def contol_mux(a, b, c, d):  # use binary bit to control mux
 # temp              -30,  -20   -10     0    10     20   30    40    50
 # index               0,    1,    2,    3,    4,    5,    6,    7 ,   8
 NO2_tempArray = [1.18, 1.18, 1.18, 1.18, 1.18, 1.18, 1.18, 2.00, 2.70]  # SN1
-O3_tempArray = [0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 2.87]  # SN2
+O3_tempArray = [0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.8, 0.8, 2.87]  # SN2
 CO_tempArray = [1.40, 1.03, 0.85, 0.62, 0.30, 0.03, -0.25, -0.48, -0.80]  # SN3
 SO2_tempArray = [0.85, 0.85, 0.85, 0.85, 0.85, 1.15, 1.45, 1.75, 1.95]  # SN4
 # ------------------------------------------------------------------------
 
-def get_n(temper, air):  # air = (NO2,O3, CO, SO2)
-    # temper
+def get_n(temper, air):
     i = 0  # index
     mulx = 0  # multiple #times
     if (-30 <= temper < -20):
         i = 0;
-        mulx = temper + 30  # ex -28'C + 30 = 2 >> 2
+        mulx = temper + 30
     elif (-20 <= temper < -10):
         i = 1;
         mulx = temper + 20
@@ -69,7 +68,15 @@ def get_n(temper, air):  # air = (NO2,O3, CO, SO2)
         i = 8;  # if temperature exceed 50 just give 50'C data
 
     N = 0.0
-    if (air == 'O3'):
+
+    if (air == 'NO2'):
+        if (i == 8):
+            N = NO2_tempArray[i]
+        else:
+            tmp = (NO2_tempArray[i + 1] - NO2_tempArray[i]) / 10.0
+            N = NO2_tempArray[i] + (tmp * mulx)
+
+    elif (air == 'O3'):
         if (i == 8):
             N = O3_tempArray[i]
         else:
@@ -82,13 +89,6 @@ def get_n(temper, air):  # air = (NO2,O3, CO, SO2)
         else:
             tmp = (CO_tempArray[i + 1] - CO_tempArray[i]) / 10.0
             N = CO_tempArray[i] + (tmp * mulx)
-
-    elif (air == 'NO2'):
-        if (i == 8):
-            N = NO2_tempArray[i]
-        else:
-            tmp = (NO2_tempArray[i + 1] - NO2_tempArray[i]) / 10.0
-            N = NO2_tempArray[i] + (tmp * mulx)
 
     elif (air == 'SO2'):
         if (i == 8):
@@ -125,12 +125,12 @@ def AQI_convert(c, air):
     c_high = 0.0
     i_low = 0.0
     i_high = 0.0
-    I = 0.0
+    AQI = 0.0
 
     if (air == 'PM25'):
         for i in range(0, 7):
             if (PM25_MaxAqiArray[6] < c):
-                I = 500
+                AQI = 500
                 break;
 
             elif (PM25_MinAqiArray[i] <= c < PM25_MaxAqiArray[i]):
@@ -143,7 +143,7 @@ def AQI_convert(c, air):
     elif (air == 'CO'):
         for i in range(0, 7):
             if (CO_MaxAqiArray[6] < c):
-                I = 500
+                AQI = 500
                 break;
 
             elif (CO_MinAqiArray[i] <= c < CO_MaxAqiArray[i]):
@@ -152,10 +152,11 @@ def AQI_convert(c, air):
                 i_low = Aqi_MinAqiArray[i];
                 i_high = Aqi_MaxAqiArray[i];
                 break;
+
     elif (air == 'SO2'):
         for i in range(0, 7):
             if (SO2_MaxAqiArray[6] < c):
-                I = 500
+                AQI = 500
                 break;
 
             elif (SO2_MinAqiArray[i] <= c < SO2_MaxAqiArray[i]):
@@ -167,7 +168,7 @@ def AQI_convert(c, air):
     elif (air == 'NO2'):
         for i in range(0, 7):
             if (NO2_MaxAqiArray[6] < c):
-                I = 500
+                AQI = 500
                 break;
 
             if (NO2_MinAqiArray[i] <= c < NO2_MaxAqiArray[i]):
@@ -176,10 +177,11 @@ def AQI_convert(c, air):
                 i_low = Aqi_MinAqiArray[i];
                 i_high = Aqi_MaxAqiArray[i];
                 break;
+
     elif (air == 'O3'):
         for i in range(0, 5):
             if (O3_AqiArray[4] < c):
-                I = 500
+                AQI = 500
                 break;
 
             if (O3_AqiArray[i] <= c < O3_AqiArray[i]):
@@ -189,10 +191,10 @@ def AQI_convert(c, air):
                 i_high = Aqi_MaxAqiArray[i];
                 break;
     # AQI equation
-    if (I != 500):
-        I = (((i_high - i_low) / (c_high - c_low)) * (c - c_low)) + i_low
+    if (AQI!= 500):
+        AQI = (((i_high - i_low) / (c_high - c_low)) * (c - c_low)) + i_low
 
-    return I;
+    return AQI;
 
 
 if __name__ == '__main__':
@@ -244,75 +246,75 @@ if __name__ == '__main__':
             t = (t * 1.8) + 32
             print("Temp: {} F ".format(t))
 
-            # C1 NO2_WE
+            # C1= NO2_WE
             raw, scale = contol_mux(0, 0, 1, 0)
             sleep(0.05)
             c2 = raw * scale
 
 
-            # C2 NO2_AE
+            # C2 =NO2_AE
             raw, scale = contol_mux(0, 0, 1, 1)
             sleep(0.05)
             c3 = raw * scale
-           
-            # SN1 NO2
+
+            # SN1= NO2
             SN1 = ((c2 - NO2_WE) - (get_n(t, 'NO2') * (c3 - NO2_AE))) / NO2_alpha
             SN1 = SN1 if (SN1 >= 0) else -SN1
             print("NO2: {} ".format(SN1))
 
 
-            # C4 O3_WE
+            # C4= O3_WE
             raw, scale = contol_mux(0, 1, 0, 0)
             sleep(0.05)
             c4 = raw * scale
 
-            #C5 O3_AE
+            #C5= O3_AE
             raw, scale = contol_mux(0, 1, 0, 1)
             sleep(0.05)
             c5 = raw * scale
 
-            # SN2 O3
+            # SN2 =O3
             SN2 = ((c4 - O3_WE) - (get_n(t, 'O3') * (c5 - O3_AE))) / O3_alpha
             SN2 = SN2 if (SN2 >= 0) else -SN2
             print("O3: {} ".format(SN2))
 
 
-            # C6 CO_WE
+            # C6= CO_WE
             raw, scale = contol_mux(0, 1, 1, 0)
             sleep(0.05)
             c6 = raw * scale
 
-            #C7 CO_AE
+            #C7= CO_AE
             raw, scale = contol_mux(0, 1, 1, 1)
             sleep(0.05)
             c7 = raw * scale
 
-            # SN3 CO
+            # SN3= CO
             SN3 = ((c6 - CO_WE) - (get_n(t, 'CO') * (c7 - CO_AE))) / CO_alpha
             SN3 = SN3 / 1000
             SN3 = SN3 if (SN3 >= 0) else -SN3
             print("CO: {} ".format(SN3))
 
 
-            #C8 SO2_WE
+            #C8 =SO2_WE
             raw, scale = contol_mux(1, 0, 0, 0)
             sleep(0.05)
             c8 = raw * scale
 
-            # C9 SO2_AE
+            # C9= SO2_AE
             raw, scale = contol_mux(1, 0, 0, 1)
             sleep(0.05)
             c9 = raw * scale
 
 
 
-            #  SN4 SO2
+            #  SN4= SO2
             SN4 = ((c8 - SO2_WE) - (get_n(t, 'SO2') * (c9 - SO2_AE))) / SO2_alpha
             SN4 = SN4 if (SN4 >= 0) else -SN4
             print("SO2: {} ".format(SN4))
 
 
-            # C11 PM2.5
+            # C11 =PM2.5
             raw, scale = contol_mux(1, 0, 1, 1)
             sleep(0.05)
             c11 = (raw * scale) / 1000
@@ -340,7 +342,8 @@ if __name__ == '__main__':
             print("")
 
             nowtime = datetime.now()
-
+            print(nowtime)
+            
             if args.output_format == "json":
                 output = {
                 "year": nowtime.year,
