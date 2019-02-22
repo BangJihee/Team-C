@@ -274,6 +274,10 @@ if __name__ == '__main__':
             raw, scale = contol_mux(0, 1, 0, 1)
             sleep(0.05)
             c5 = raw * scale
+            print("----------------------")
+            print(c4)
+            print(c5)
+            print("----------------------")
 
 
             # SN2 =O3
@@ -341,7 +345,7 @@ if __name__ == '__main__':
             print("AQI_SO2 : {}".format(int(AQI_SO2)))
             print("AQI_PM25: {}".format(int(AQI_PM25)))
             print("")
-            
+
             nowtime = datetime.now()
             print(nowtime)
 
