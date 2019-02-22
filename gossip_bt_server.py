@@ -327,7 +327,6 @@ if __name__ == '__main__':
             print(c9)
             print("------------------------------------------")
 
-
             #  SN4= SO2
             SN4 = ((c8 - SO2_WE) - (get_n(t, 'SO2') * (c9 - SO2_AE))) / SO2_alpha
             SN4 = SN4 if (SN4 >= 0) else -SN4
