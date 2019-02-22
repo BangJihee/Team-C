@@ -323,7 +323,7 @@ if __name__ == '__main__':
             PM25 = 0.518 + .00274 * hppcf
 
             print("PM25: {} ".format(PM25))
-
+            print("")
             # print("It's now: {:%Y/%m/%d %H:%M:%S}".format(epochtime))
 
             AQI_NO2 = AQI_convert(SN1, 'NO2')
@@ -341,8 +341,8 @@ if __name__ == '__main__':
 
             nowtime = datetime.now()
             print(nowtime)
-            print("---------------------------------------")
-            print("")
+            print("----------------------------")
+
 
             if args.output_format == "json":
                 output = {
