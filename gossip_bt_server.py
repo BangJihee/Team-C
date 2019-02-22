@@ -326,7 +326,6 @@ if __name__ == '__main__':
             print("PM25: {} ".format(PM25))
 
             # print("It's now: {:%Y/%m/%d %H:%M:%S}".format(epochtime))
-            print("\n")
 
             AQI_NO2 = AQI_convert(SN1, 'NO2')
             AQI_O3 = AQI_convert(SN2, 'O3')
@@ -339,11 +338,10 @@ if __name__ == '__main__':
             print("AQI_CO:{}".format(int(AQI_CO)))
             print("AQI_SO2 : {}".format(int(AQI_SO2)))
             print("AQI_PM25: {}".format(int(AQI_PM25)))
-            print("")
-
+            
             nowtime = datetime.now()
             print(nowtime)
-            
+
             if args.output_format == "json":
                 output = {
                 "year": nowtime.year,
