@@ -361,6 +361,7 @@ if __name__ == '__main__':
             nowtime = datetime.now()
             print(nowtime)
 
+
             if args.output_format == "json":
                 output = {
                 "year": nowtime.year,
