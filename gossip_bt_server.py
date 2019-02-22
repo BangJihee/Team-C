@@ -250,14 +250,10 @@ if __name__ == '__main__':
             sleep(0.05)
             c2 = raw * scale
 
-
-
             # C2 =NO2_AE
             raw, scale = contol_mux(0, 0, 1, 1)
             sleep(0.05)
             c3 = raw * scale
-
-
 
             # SN1= NO2
             SN1 = ((c2 - NO2_WE) - (get_n(t, 'NO2') * (c3 - NO2_AE))) / NO2_alpha
