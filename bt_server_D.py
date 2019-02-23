@@ -351,6 +351,7 @@ if __name__ == '__main__':
             print("AQI_PM25: {}".format(int(AQI_PM25)))
             print("")
 
+
             nowtime = datetime.now()
             print(nowtime)
             print("----------------------------")
