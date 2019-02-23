@@ -344,11 +344,11 @@ if __name__ == '__main__':
             print(nowtime)
             print("----------------------------")
 
-            c="C" #distinct our 4 sensors to use this value
+            a = "A" #distinct our 4 sensors to use this value
 
             if args.output_format == "json":
                 output = {
-                "MAC" : c,
+                "MAC" : a,
                 "year": nowtime.year,
                 "month": nowtime.month,
                 "day": nowtime.day,
