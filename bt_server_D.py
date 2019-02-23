@@ -355,7 +355,7 @@ if __name__ == '__main__':
             print(nowtime)
             print("----------------------------")
 
-            d= "D" #distinct our 4 sensors to use this value
+            d = "D" #distinct our 4 sensors to use this value
 
             if args.output_format == "json":
                 output = {
@@ -378,6 +378,7 @@ if __name__ == '__main__':
                     'A_SN4': int(AQI_SO2),  # SO2
                     'A_PM25': int(AQI_PM25)
                 }
+
 
                 msg = json.dumps(output)
             elif args.output_format == "csv":
