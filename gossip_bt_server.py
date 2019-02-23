@@ -274,7 +274,6 @@ if __name__ == '__main__':
 
 
             # SN2 =O3
-            print("o3_n=",get_n(t, 'O3'))
             SN2 = ((c4 - O3_WE) - (get_n(t, 'O3') * (c5 - O3_AE))) / O3_alpha
             SN2 = SN2 if (SN2 >= 0) else -SN2
             print("O3: {} ".format(SN2))
