@@ -355,6 +355,7 @@ if __name__ == '__main__':
             print("----------------------------")
 
             b = "B" #distinct our 4 sensors to use this value
+            
 
             if args.output_format == "json":
                 output = {
