@@ -10,6 +10,8 @@ from datetime import datetime
 from json import dumps
 import logging
 
+#Each Alpha sensor has different we, ae , alpha value
+#So our team uses these data to create data sheet
 # ------------ Alpha sense data sheet -------------
 NO2_WE = 220; NO2_AE = 260; NO2_alpha = 0.207;
 O3_WE = 414; O3_AE = 400; O3_alpha = 0.256;
@@ -17,7 +19,10 @@ CO_WE = 346; CO_AE = 274; CO_alpha = 0.276;
 SO2_WE = 300; SO2_AE = 294; SO2_alpha = 0.300;
 # ------------------------------------------------
 
-def contol_mux(a, b, c, d):  # use binary bit to control mux
+
+#We use mux board to write digital value . Use binary bit to control mux channel
+
+def contol_mux(a, b, c, d):
     neo.digitalWrite(gpiopins[0], d)
     neo.digitalWrite(gpiopins[1], c)
     neo.digitalWrite(gpiopins[2], b)
@@ -26,8 +31,10 @@ def contol_mux(a, b, c, d):  # use binary bit to control mux
     scale = float(open("/sys/bus/iio/devices/iio:device0/in_voltage_scale").read())
     return raw, scale
 
+#This Table is about n value. (Celsius)
+
 # ---------------------------N table -------------------------------------
-# array for calculate alph
+# array for calculate n value
 # temp              -30,  -20   -10     0    10     20   30    40    50
 # index               0,    1,    2,    3,    4,    5,    6,    7 ,   8
 NO2_tempArray = [1.18, 1.18, 1.18, 1.18, 1.18, 1.18, 1.18, 2.00, 2.70]  # SN1
@@ -35,6 +42,8 @@ O3_tempArray = [0.18, 0.18, 0.18, 0.18, 0.18, 0.8, 0.8, 0.8, 2.87]  # SN2
 CO_tempArray = [1.40, 1.03, 0.85, 0.62, 0.30, 0.03, -0.25, -0.48, -0.80]  # SN3
 SO2_tempArray = [0.85, 0.85, 0.85, 0.85, 0.85, 1.15, 1.45, 1.75, 1.95]  # SN4
 # ------------------------------------------------------------------------
+
+#N value depends on real temperature value.
 
 def get_n(temper, air):
     i = 0  # index
