@@ -23,10 +23,8 @@ CO_alpha = 0.276;
 SO2_WE = 300;
 SO2_AE = 294;
 SO2_alpha = 0.300;
-
-
 # ------------------------------------------------
-
+# We can use this code to control my mux board.
 def contol_mux(a, b, c, d):  # use binary bit to control mux
     neo.digitalWrite(gpiopins[0], d)
     neo.digitalWrite(gpiopins[1], c)
@@ -38,15 +36,13 @@ def contol_mux(a, b, c, d):  # use binary bit to control mux
 
 
 # ---------------------------N table -------------------------------------
-# array for calculate alph
+# array for calculate alpha sensor -> temperature n value
 # temp              -30,  -20   -10     0    10     20   30    40    50
 # index               0,    1,    2,    3,    4,    5,    6,    7 ,   8
 NO2_tempArray = [1.18, 1.18, 1.18, 1.18, 1.18, 1.18, 1.18, 2.00, 2.70]  # SN1
 O3_tempArray = [0.18, 0.18, 0.18, 0.18, 0.18, 0.8, 0.8, 0.8, 2.87]  # SN2
 CO_tempArray = [1.40, 1.03, 0.85, 0.62, 0.30, 0.03, -0.25, -0.48, -0.80]  # SN3
 SO2_tempArray = [0.85, 0.85, 0.85, 0.85, 0.85, 1.15, 1.45, 1.75, 1.95]  # SN4
-
-
 # ------------------------------------------------------------------------
 
 def get_n(temper, air):
@@ -113,8 +109,8 @@ def get_n(temper, air):
 
 
 # --------------------------- AQI table ----------------------------------------
-# AQI              0-50,  51-100, 101-150, 151-200, 201-300, 301-400, 401-500
-# index               0,       1,       2,       3,       4,       5,       6,
+# AQI             0-50,  51-100, 101-150, 151-200, 201-300, 301-400, 401-500
+# index           0,       1,       2,       3,       4,       5,       6,
 # MAX (03, PM25, CO, SO2, NO2, AQI)
 O3_AqiArray = [55.0, 71.0, 86.0, 106.0, 200.0, 0.0, 0.0]
 PM25_MaxAqiArray = [12.1, 35.5, 55.5, 150.5, 250.5, 350.5, 500.4]
@@ -130,8 +126,6 @@ CO_MinAqiArray = [0.0, 4.5, 9.5, 12.5, 15.5, 30.5, 40.5]
 SO2_MinAqiArray = [0.0, 36.0, 76.0, 186.0, 305.0, 605.0, 805.0]
 NO2_MinAqiArray = [0.0, 54.0, 101.0, 361.0, 650.0, 1250.0, 1650.0]
 Aqi_MinAqiArray = [0.0, 51.0, 101.0, 151.0, 201.0, 301.0, 401.0]
-
-
 # -------------------------------------------------------------------------------
 
 
@@ -230,8 +224,6 @@ if __name__ == '__main__':
     server_thread.daemon = True
     server_thread.start()
 
-    # epochtime = datetime.now().strftime('%Y-%m-%d %H:%M:%S') #(int)(time())
-
     neo = Gpio()
 
     gpiopins = [24, 25, 26, 27]
@@ -261,27 +253,27 @@ if __name__ == '__main__':
             t = (t * 1.8) + 32
             print("Temp: {} F ".format(t))
 
-            # C1= NO2_WE
+            # C 1= NO2_WE
             raw, scale = contol_mux(0, 0, 1, 0)
             sleep(0.05)
             c2 = raw * scale
 
-            # C2 =NO2_AE
+            # C2 = NO2_AE
             raw, scale = contol_mux(0, 0, 1, 1)
             sleep(0.05)
             c3 = raw * scale
 
-            # SN1= NO2
+            # SN1 = NO2
             SN1 = ((c2 - NO2_WE) - (get_n(t, 'NO2') * (c3 - NO2_AE))) / NO2_alpha
             SN1 = SN1 if (SN1 >= 0) else -SN1
             print("NO2: {} ".format(SN1))
 
-            # C4= O3_WE
+            # C4 = O3_WE
             raw, scale = contol_mux(0, 1, 0, 0)
             sleep(0.05)
             c4 = raw * scale
 
-            # C5= O3_AE
+            # C5 = O3_AE
             raw, scale = contol_mux(0, 1, 0, 1)
             sleep(0.05)
             c5 = raw * scale

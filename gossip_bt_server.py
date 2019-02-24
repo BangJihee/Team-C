@@ -324,7 +324,7 @@ if __name__ == '__main__':
 
             print("PM25: {} ".format(PM25))
             print("")
-            # print("It's now: {:%Y/%m/%d %H:%M:%S}".format(epochtime))
+
 
             AQI_NO2 = AQI_convert(SN1, 'NO2')
             AQI_O3 = AQI_convert(SN2, 'O3')
