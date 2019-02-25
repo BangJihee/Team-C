@@ -226,7 +226,7 @@ if __name__ == '__main__':
 
     neo = Gpio()
 
-    gpiopins = [24, 25, 26, 27]
+    gpiopins = [8, 9, 10, 11]
     gpio = Gpio()
 
     pinnum = [0, 0, 0, 0]
