@@ -102,7 +102,7 @@ def get_n(temper, air):
 # AQI              0-50,  51-100, 101-150, 151-200, 201-300, 301-400, 401-500
 # index               0,       1,       2,       3,       4,       5,       6,
 # MAX (03, PM25, CO, SO2, NO2, AQI)
-O3_AqiArray = [55.0, 71.0, 86.0, 106.0, 200.0, 0.0, 0.0]
+O3_MaxAqiArray = [55.0, 71.0, 86.0, 106.0, 200.0, 0.0, 0.0]
 PM25_MaxAqiArray = [12.1, 35.5, 55.5, 150.5, 250.5, 350.5, 500.4]
 CO_MaxAqiArray = [4.5, 9.5, 12.5, 15.5, 30.5, 40.5, 50.4]
 SO2_MaxAqiArray = [36.0, 76.0, 186.0, 305.0, 605.0, 805.0, 1004.0]
@@ -110,7 +110,7 @@ NO2_MaxAqiArray = [54.0, 101.0, 361.0, 650.0, 1250.0, 1650.0, 2049.0]
 Aqi_MaxAqiArray = [51.0, 101.0, 151.0, 201.0, 301.0, 401.0, 500.0]
 
 # MIN (03, PM25, CO, SO2, NO2, AQI)
-O3_AqiArray = [0.0, 55.0, 71.0, 86.0, 106.0, 0.0, 0.0]
+O3_MinAqiArray = [0.0, 55.0, 71.0, 86.0, 106.0, 0.0, 0.0]
 PM25_MinAqiArray = [0.0, 12.1, 35.5, 55.5, 150.5, 250.5, 350.5]
 CO_MinAqiArray = [0.0, 4.5, 9.5, 12.5, 15.5, 30.5, 40.5]
 SO2_MinAqiArray = [0.0, 36.0, 76.0, 186.0, 305.0, 605.0, 805.0]
@@ -179,13 +179,13 @@ def AQI_convert(c, air):
 
     elif (air == 'O3'):
         for i in range(0, 5):
-            if (O3_AqiArray[4] < c):
+            if (O3_MaxAqiArray[4] < c):
                 AQI = 500
                 break;
 
-            if (O3_AqiArray[i] <= c < O3_AqiArray[i]):
-                c_low = O3_AqiArray[i];
-                c_high = O3_AqiArray[i];
+            if (O3_MinAqiArray[i] <= c < O3_MaxAqiArray[i]):
+                c_low = O3_MinAqiArray[i];
+                c_high = O3_MaxAqiArray[i];
                 i_low = Aqi_MinAqiArray[i];
                 i_high = Aqi_MaxAqiArray[i];
                 break;
